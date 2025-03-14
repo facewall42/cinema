@@ -1,0 +1,46 @@
+:root {
+    font-size: 62.5%;
+}
+body {
+    font-size: 1.5rem;
+}
+nav {
+    /* font-size: 1.5rem; */
+    padding: 10px 20px !important;
+}
+h1 {
+    font-size: 3.1rem;
+}
+h2,
+h3 {
+    color: #ff3366;
+    font-size: 2.9rem;
+    margin-bottom: 15px;
+}
+
+img[src="assets/img/logo.png"] {
+    width: 50px;
+}
+span {
+    color: #ff3366;
+}
+em {
+    color: #577f49;
+    font-weight: bold;
+}
+
+span.bleu {
+    color: blue;
+}
+
+span.vert {
+    color: #577f49;
+}
+
+span.rouge {
+    color: red;
+}
+
+th {
+    text-align: center;
+}

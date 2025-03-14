@@ -1,0 +1,1 @@
+<p class="alert alert-success">Deuxième fichier d'inclusion</p>
