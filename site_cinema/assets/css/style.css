@@ -1,16 +1,15 @@
-:root{
-    --red: #BB2D3B;
-    --gray: #191A19;
+:root {
+    --red: #bb2d3b;
+    --gray: #191a19;
     --gray-2: #353535;
-    --gray-light: #BBBBBB;
+    --gray-light: #bbbbbb;
     --black: #000;
-    --box-shadow-dark: 0px 5px 10px 0px rgba(50,50,50,.8);
-    --box-shadow-light:  -1px 1px 10px 0px #EFE8E8;;
+    --box-shadow-dark: 0px 5px 10px 0px rgba(50, 50, 50, 0.8);
+    --box-shadow-light: -1px 1px 10px 0px #efe8e8;
     font-size: 62.5%;
-
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -18,15 +17,12 @@
     /* box-shadow: 0 0 0 3px red inset; */
 }
 
-
 body {
     font-size: 1.6rem;
     font-family: "Dosis", sans-serif;
 
-   background-color: var(--gray);
-   color: #fff;
-
-
+    background-color: var(--gray);
+    color: #fff;
 }
 nav {
     background-color: #fff;
@@ -35,33 +31,30 @@ nav {
 
 h1 {
     font-size: 4rem !important;
-    margin: .8rem 4rem;
+    margin: 0.8rem 4rem;
     font-weight: bolder;
     font-family: "Lora", serif;
-
-
 }
-h1 a{
+h1 a {
     font-size: 4rem !important;
     color: var(--red) !important;
 }
 h1 img {
     width: 50px !important;
     height: 50px !important;
-
 }
-nav li a{
+nav li a {
     color: var(--black) !important;
-    margin: 0.8rem ;
+    margin: 0.8rem;
     font-family: "Lora", serif;
 }
 
-nav li a.dropdown-item{
-    padding: 0.8rem ;
+nav li a.dropdown-item {
+    padding: 0.8rem;
 }
 
-
-.dropdown-item:focus, .dropdown-item:hover{
+.dropdown-item:focus,
+.dropdown-item:hover {
     width: 100% !important;
     background-color: var(--red) !important;
     /* margin: 0 !important; */
@@ -71,39 +64,33 @@ nav .navbar-toggler {
     font-size: 1.7rem;
 }
 
-main{
+main {
     padding: 10rem 4rem;
     /* margin-top: 10rem !important; */
     min-height: 815px; /* je le met afin d'empêcher le footer de rementer dans la page*/
-    transition: all .2s;
+    transition: all 0.2s;
 }
 
 /********************************* Page Accueil ***********************************/
-h2{
-
+h2 {
     font-size: 5rem !important;
     color: var(--red);
     font-weight: bolder;
 }
-.films .row  {
-
+.films .row {
     width: 90%;
     margin: 0 auto;
 }
 
 .films > .row > div {
-
-    padding : 3rem
+    padding: 3rem;
 }
-.card{
-
+.card {
     color: var(--gray);
     box-shadow: var(--box-shadow-dark) !important;
     transition: all 0.5s;
-
 }
-.card:hover{
-
+.card:hover {
     cursor: pointer;
     transform: scale(1.7) rotate(360deg);
     z-index: 1;
@@ -111,46 +98,43 @@ h2{
 }
 
 .card-body {
-
     text-align: center;
 }
 
-.card-body h3{
-
+.card-body h3 {
     font-size: 3rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     font-weight: bolder;
 }
-.card-body h4{
-
+.card-body h4 {
     font-size: 2rem;
     font-weight: 100;
-    padding-bottom: .8rem;
+    padding-bottom: 0.8rem;
     color: var(--gray);
 }
 img {
     width: 100%;
 }
 
-a.btn, input.btnpanier{
+a.btn,
+input.btnpanier {
     background-color: var(--red) !important;
     color: white;
-    padding: .8rem;
+    padding: 0.8rem;
     font-size: 1.3rem !important;
     font-weight: bold;
 }
 
 /************************************* Page d'un film ********************************/
 
-.film{
+.film {
     width: 90%;
     margin: 0 auto;
     background-color: var(--gray);
     padding: 2rem 3rem;
-    transition: all .5s;
+    transition: all 0.5s;
     box-shadow: var(--box-shadow-light) !important;
-
 }
 
 .film i {
@@ -159,15 +143,15 @@ a.btn, input.btnpanier{
 
 .cardDetails {
     width: 80%;
-    margin: 0 auto ;
+    margin: 0 auto;
 }
 
-.detailsImg img{
+.detailsImg img {
     box-shadow: var(--box-shadow-light);
 }
 
-.detailsContent span{
-    color: #87556F;
+.detailsContent span {
+    color: #87556f;
     font-size: 2.5rem;
     font-weight: bolder;
 }
@@ -175,11 +159,11 @@ a.btn, input.btnpanier{
     margin: 3rem 2rem;
 } */
 
-.detailsContent p, ul {
+.detailsContent p,
+ul {
     font-size: 2rem;
 }
 /******************** Page de gestion des films (formulaire) ************************/
-
 
 form.back {
     width: 50%;
@@ -194,14 +178,12 @@ form.back > div.row {
 form.back .row {
     padding: 2.5rem;
     background-color: #212529;
-
 }
 
-form.back  label:not(.form-check-label) {
+form.back label:not(.form-check-label) {
     margin-bottom: 1.6rem;
     font-weight: bolder;
     color: var(--black);
-
 }
 form.back .form-control {
     font-size: 1.5rem !important;
@@ -211,20 +193,18 @@ form.back button {
     font-size: 1.4rem !important;
 }
 
-
-.active{
+.active {
     background-color: var(--red) !important;
     color: white !important;
     font-weight: bolder;
 }
 
-
-table, .sidebarre {
+table,
+.sidebarre {
     background-color: #353535;
     color: white !important;
     box-shadow: var(--box-shadow-light) !important;
 }
-
 
 .bi {
     color: var(--red);
@@ -238,11 +218,9 @@ input{
 } */
 /* Footer */
 
-footer{
-
+footer {
     background-color: var(--black);
     height: 100px !important ;
-
 }
 
 /* Page panier */
@@ -259,27 +237,20 @@ footer{
 table {
     border-collapse: collapse;
     /* width: 100%; */
-
-
 }
 th {
     padding: 10px 0;
     font-weight: 400;
 }
 
-
-
-
-
 /* classe pour cacher les card quand on click sur une  */
-.hidden{
+.hidden {
     padding: 0 !important;
     height: 0 !important;
     overflow: hidden !important;
     opacity: 0 !important;
-    transition: all .5s;
+    transition: all 0.5s;
 }
-
 
 /* Card profil */
 
@@ -298,13 +269,11 @@ th {
 }
 
 .cardfilm .image img {
-   
-    transition: .5s;
-    
+    transition: 0.5s;
 }
 
 .cardfilm:hover .image img {
-    opacity: .5;
+    opacity: 0.5;
     transform: translateX(30%);
 }
 
@@ -315,7 +284,7 @@ th {
     width: 70%;
     height: 100%;
     background: var(--red);
-    transition: .5s;
+    transition: 0.5s;
     transform-origin: left;
     transform: perspective(2000px) rotateY(-90deg);
 }

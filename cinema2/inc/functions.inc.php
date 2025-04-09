@@ -6,7 +6,8 @@ define("RACINE_SITE", "http://localhost/cinema2/");
 
 ///////////////////////////////////////// Fonction alert ///////////////////////////////////////////////////////////////
 
-function alert(string $contenu, string $class) : string {
+function alert(string $contenu, string $class): string
+{
     return "<div class=\"alert alert-$class alert-dismissible fade show text-center w-50 m-auto mb-5\" role=\"alert\">
     $contenu
                 <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>
@@ -16,17 +17,19 @@ function alert(string $contenu, string $class) : string {
 
 ////////////////////////////////////////////// Fonction pour debugger //////////////////////////////////////////////////////////
 
-function debug ($var) {
+function debug($var)
+{
 
     echo '<pre class= "border border-dark bg-light text-danger fw-bold w-50 p-5 mt-5">';
 
-        var_dump($var);
+    var_dump($var);
 
     echo '</pre>';
 }
 //////// FONCTION POUR CONVERTIR LA STRING EN TABLEAUX POUR LES ACTEURS////////////////////////////////
-function stringToArray(string $string ) :array{
-    
+function stringToArray(string $string): array
+{
+
     $array = explode('/', trim($string, '/')); // Je transforme ma chaîne de caractères en tableau et je supprime les / autour de la chaîne de caractères 
     return $array; // ma fonction retourne un tableau
 
@@ -41,7 +44,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'deconnexion') {
     // donc on utilise unset()
     // pour un site communautaire / blog : on utlise destroy()
 
-    unset($_SESSION['client']); 
+    unset($_SESSION['client']);
     // on supprime l'indice 'client' de la session pour se déconnecter / cette fonction détruit les éléments du tableau $_SESSION['client'].
 
     // Puis notre utilisateur est alors déconnecté, donc on va le renvoyer vers par exemple, la page d'authentification
@@ -49,11 +52,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'deconnexion') {
     // session_destroy();
     // La fonction session_destroy détruit toutes les données de la session déjà établie. Cette fonction détruit la session sur le serveur
 
-    header('location:'.RACINE_SITE.'index.php');
-
-
-
-
+    header('location:' . RACINE_SITE . 'index.php');
 }
 
 
@@ -72,10 +71,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'deconnexion') {
 define("DBHOST", "localhost");
 
 // // constante de l'utilisateur de la BDD du serveur en local => root
-define("DBUSER","root");
+define("DBUSER", "root");
 
 // // constante pour le mot de passe de serveur en local => pas de mot de passe
-define("DBPASS",""); 
+define("DBPASS", "");
 
 // // Constante pour le nom de la BDD
 define("DBNAME", "cinema");
@@ -84,36 +83,36 @@ define("DBNAME", "cinema");
 
 
 
-function connexionBdd() : object {
+function connexionBdd(): object
+{
 
 
-                //DSN (Data Source Name):
+    //DSN (Data Source Name):
 
-                //$dsn = mysql:host=localhost;dbname=cinema;charset=utf8;
-                $dsn = "mysql:host=".DBHOST.";dbname=".DBNAME.";charset=utf8";
+    //$dsn = mysql:host=localhost;dbname=cinema;charset=utf8;
+    $dsn = "mysql:host=" . DBHOST . ";dbname=" . DBNAME . ";charset=utf8";
 
-                //Grâce à PDP on peut lever une exception (une erreur) si la connexion à la BDD ne se réalise pas(exp: suite à une faute au niveau du nom de la BDD) et par la suite si cette erreur est capté on lui demande d'afficher une erreur
+    //Grâce à PDP on peut lever une exception (une erreur) si la connexion à la BDD ne se réalise pas(exp: suite à une faute au niveau du nom de la BDD) et par la suite si cette erreur est capté on lui demande d'afficher une erreur
 
-                    try{ // dans le try on va instancier PDO, c'est créer un objet de la classe PDO (un élment de PDO)
-                        // Sans la variable dsn les constantes d'environnement
-                        // $pdo = new PDO('mysql:host=localhost;dbname=entreprise;charset=utf8','root','');
-                        $pdo = new PDO($dsn, DBUSER, DBPASS); 
-                        //On définit le mode d'erreur de PDO sur Exception
-                        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                        // POUR SAHAR:  cet atribut est à rajouter après le premier fetch en bas 
-                            //On définit le mode de "fetch" par défaut
-                            $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
-                            // grâce à fetch_assoc, on récupère l'objet (qu'on ne peut pas afficher comme ça), puis fetch le transforme en tableau, qu'on peut afficher !
-                        // je vérifie la connexion avec ma BDD avec un simple echo
+    try { // dans le try on va instancier PDO, c'est créer un objet de la classe PDO (un élment de PDO)
+        // Sans la variable dsn les constantes d'environnement
+        // $pdo = new PDO('mysql:host=localhost;dbname=entreprise;charset=utf8','root','');
+        $pdo = new PDO($dsn, DBUSER, DBPASS);
+        //On définit le mode d'erreur de PDO sur Exception
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // POUR SAHAR:  cet atribut est à rajouter après le premier fetch en bas 
+        //On définit le mode de "fetch" par défaut
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        // grâce à fetch_assoc, on récupère l'objet (qu'on ne peut pas afficher comme ça), puis fetch le transforme en tableau, qu'on peut afficher !
+        // je vérifie la connexion avec ma BDD avec un simple echo
 
-                        // echo "Je suis connecté à la BDD";
-                    }
-                    catch(PDOException $e){  // PDOException est une classe qui représente une erreur émise par PDO et $e c'est l'objet de la clase en question qui va stocker cette erreur
+        // echo "Je suis connecté à la BDD";
+    } catch (PDOException $e) {  // PDOException est une classe qui représente une erreur émise par PDO et $e c'est l'objet de la clase en question qui va stocker cette erreur
 
-                        die("Erreur : " .$e->getMessage()); // die d'arrêter le PHP et d'afficher une erreur en utilisant la méthode getmessage de l'objet $e
-                    }
+        die("Erreur : " . $e->getMessage()); // die d'arrêter le PHP et d'afficher une erreur en utilisant la méthode getmessage de l'objet $e
+    }
 
-                    //le catch sera exécuter dès lors on aura un problème da le try
+    //le catch sera exécuter dès lors on aura un problème da le try
     return $pdo;
 }
 
@@ -134,7 +133,8 @@ function connexionBdd() : object {
 
 
 
-function createTableCategories() : void { // cette fonction va juste créer une table dans la base de données, elle ne retourne rien
+function createTableCategories(): void
+{ // cette fonction va juste créer une table dans la base de données, elle ne retourne rien
 
     // notre connexion
     $cnx = connexionBdd();
@@ -148,9 +148,7 @@ function createTableCategories() : void { // cette fonction va juste créer une 
                                                 
                                                 )";
 
-$request = $cnx->exec($sql);
-
-
+    $request = $cnx->exec($sql);
 }
 
 // createTableCategories();
@@ -162,7 +160,8 @@ $request = $cnx->exec($sql);
 
 
 
-function createTableFilms() : void {
+function createTableFilms(): void
+{
 
     $cnx = connexionBdd();
 
@@ -171,10 +170,7 @@ function createTableFilms() : void {
     
                                                 )";
 
-$request2 = $cnx->exec($sql2);
-
-
-
+    $request2 = $cnx->exec($sql2);
 }
 
 
@@ -186,7 +182,8 @@ $request2 = $cnx->exec($sql2);
 
 
 
-function createTableUsers() : void {
+function createTableUsers(): void
+{
 
     $cnx = connexionBdd();
 
@@ -195,9 +192,7 @@ function createTableUsers() : void {
     
                                             )";
 
-$request3 = $cnx->exec($sql3);
-
-
+    $request3 = $cnx->exec($sql3);
 }
 
 
@@ -211,12 +206,12 @@ $request3 = $cnx->exec($sql3);
 
 // ALTER TABLE films ADD FOREIGN KEY category_id REFERENCES categories id_categorie
 
-function foreignKey(string $tableFK, string $keyFK, string $tablePK, string $keyPK) : void {
+function foreignKey(string $tableFK, string $keyFK, string $tablePK, string $keyPK): void
+{
     $cnx = connexionBdd();
     $sql = "ALTER TABLE $tableFK ADD FOREIGN KEY ($keyFK) REFERENCES $tablePK ($keyPK)";
 
     $request = $cnx->exec($sql);
-
 }
 
 
@@ -239,10 +234,22 @@ function foreignKey(string $tableFK, string $keyFK, string $tablePK, string $key
 ////////////////////////////////////////////////// Fonction ajout d'un utilisateur //////////////////////////////////////////////////
 
 
-function addUser(string $lastName, string $firstName, string $pseudo, string $email, string $phone, string $mdp, string $civility, string $birthday, 
-string $address, string $zip, string $city, string $country) : void { // cette fonction va prendre en paramètre les variables du formulaire
+function addUser(
+    string $lastName,
+    string $firstName,
+    string $pseudo,
+    string $email,
+    string $phone,
+    string $mdp,
+    string $civility,
+    string $birthday,
+    string $address,
+    string $zip,
+    string $city,
+    string $country
+): void { // cette fonction va prendre en paramètre les variables du formulaire
 
-// On crée un tableau associatif avec les noms des colonnes de la table users comme clés
+    // On crée un tableau associatif avec les noms des colonnes de la table users comme clés
     $data = [
         'lastName' => $lastName,
         'firstName' => $firstName,
@@ -258,13 +265,13 @@ string $address, string $zip, string $city, string $country) : void { // cette f
         'country' => $country
     ];
 
-// Echapper les données et les traiter contre les failles JS
+    // Echapper les données et les traiter contre les failles JS
 
     // $data['lastName'] = htmlspecialchars($lastName)
     // $data['firstName'] = htmlspecialchars($lastName)
     // on va pas continuer comme ça en le faisant "en dur", on va plutôt utiliser une boucle
 
-    foreach($data as $key => $value){
+    foreach ($data as $key => $value) {
 
         $data[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
         /* 
@@ -297,7 +304,7 @@ string $address, string $zip, string $city, string $country) : void { // cette f
     //prepare() est une méthode qui permet de préparer la requête sans l'exécuter. Elle contient un marqueur :firstName qui est vide et attend une valeur.
 
 
-/* Les requêtes préparees sont préconisées si vous exécutez plusieurs fois la même requête. Ainsi vous évitez au SGBD de répéter toutes les phases analyse/ interpretation / exécution de la requête (gain de performance). Les requêtes préparées sont aussi utilisées pour nettoyer les données et se prémunir des injections de type SQL.
+    /* Les requêtes préparees sont préconisées si vous exécutez plusieurs fois la même requête. Ainsi vous évitez au SGBD de répéter toutes les phases analyse/ interpretation / exécution de la requête (gain de performance). Les requêtes préparées sont aussi utilisées pour nettoyer les données et se prémunir des injections de type SQL.
 
                     1- On prépare la requête
                     2- On lie le marqueur à la requête
@@ -324,11 +331,11 @@ string $address, string $zip, string $city, string $country) : void { // cette f
     // ce tableau ci-dessus, c'est la même chose que ci-dessous SUPER IMPORTANT POUR COMPRENDRE le marqueur :lastName qui se comporte comme un pointeur
 
     $request->execute($data);
-
 }
 
 
-function checkEmailUser(string $email) : mixed { // soit on récupère un tableau avec un seul champ (mais c'est bien un tableau), soit on récupère un booléen qui donne false
+function checkEmailUser(string $email): mixed
+{ // soit on récupère un tableau avec un seul champ (mais c'est bien un tableau), soit on récupère un booléen qui donne false
 
     $cnx = connexionBdd();
     $sql = "SELECT email FROM users WHERE email = :email";
@@ -344,7 +351,8 @@ function checkEmailUser(string $email) : mixed { // soit on récupère un tablea
 
 }
 
-function checkPseudoUser(string $pseudo) : mixed { // soit on récupère un tableau avec un seul champ (mais c'est bien un tableau), soit on récupère un booléen qui donne false
+function checkPseudoUser(string $pseudo): mixed
+{ // soit on récupère un tableau avec un seul champ (mais c'est bien un tableau), soit on récupère un booléen qui donne false
 
     $cnx = connexionBdd();
     $sql = "SELECT pseudo FROM users WHERE pseudo = :pseudo";
@@ -359,7 +367,8 @@ function checkPseudoUser(string $pseudo) : mixed { // soit on récupère un tabl
 
 }
 
-function checkPseudoEtEmailUser(string $pseudo, string $email) : mixed { // soit on récupère un tableau avec un seul champ (mais c'est bien un tableau), soit on récupère un booléen qui donne false
+function checkPseudoEtEmailUser(string $pseudo, string $email): mixed
+{ // soit on récupère un tableau avec un seul champ (mais c'est bien un tableau), soit on récupère un booléen qui donne false
 
     $cnx = connexionBdd();
     $sql = "SELECT * FROM users WHERE (pseudo = :pseudo AND email = :email)"; // on peut aussi mettre SELECT pseudo, email
@@ -375,17 +384,18 @@ function checkPseudoEtEmailUser(string $pseudo, string $email) : mixed { // soit
 
 }
 
-function allUsers() : mixed {
+function allUsers(): mixed
+{
 
     $cnx = connexionBdd();
     $sql = "SELECT * FROM users";
     $request = $cnx->query($sql);
     $result = $request->fetchAll(); // on veut tous les utilisateurs (on récupère toutes les lignes à la fois), donc on utilise fetchAll(), car fetch() ne donne qu'un élement
     return $result;
-
 }
 
-function showUser(int $id) : mixed {
+function showUser(int $id): mixed
+{
 
     $cnx = connexionBdd();
     $sql = "SELECT * FROM users WHERE id_user = :id";
@@ -399,11 +409,11 @@ function showUser(int $id) : mixed {
 
     $result = $request->fetch();
     return $result;
-
 }
 
 
-function updateRole(string $role, int $id) : void {
+function updateRole(string $role, int $id): void
+{
 
     $cnx = connexionBdd();
     $sql = "UPDATE users SET role = :role WHERE id_user = :id";
@@ -417,7 +427,8 @@ function updateRole(string $role, int $id) : void {
     ));
 }
 
-function deleteUser($id) :void{
+function deleteUser($id): void
+{
     $cnx = connexionBdd();
     $sql = "DELETE FROM users WHERE id_user = :id";
     $request = $cnx->prepare($sql);
@@ -426,7 +437,8 @@ function deleteUser($id) :void{
     ));
 }
 //*********************************************** ?????*/
-function showCat(int $name):mixed{
+function showCat(int $name): mixed
+{
     $cnx = connexionBdd();
     $sql = "SELECT * FROM categories WHERE name = :name";
     $request = $cnx->prepare($sql);
@@ -437,12 +449,13 @@ function showCat(int $name):mixed{
     return $result;
 }
 //***************************************************??? */
-function showCategory(string $id) : mixed{
+function showCategory(string $id): mixed
+{
     $cnx = connexionBdd();
-    $sql= "SELECT * FROM categories WHERE id_category = :id";
-    $request = $cnx-> prepare($sql);
+    $sql = "SELECT * FROM categories WHERE id_category = :id";
+    $request = $cnx->prepare($sql);
     $request->execute(array(
-        ":id" =>$id
+        ":id" => $id
     ));
     $result = $request->fetch();
     return $result;
@@ -450,21 +463,22 @@ function showCategory(string $id) : mixed{
 
 function addCategory(string $name, string $description)
 {
-    $data =[
-        'name'=> $name,
-        'description'=>$description
+    $data = [
+        'name' => $name,
+        'description' => $description
     ];
-    foreach ($data as $key => $value){
+    foreach ($data as $key => $value) {
         $data[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
     }
 
     $cnx = connexionBdd();
-    $sql ="INSERT INTO categories (name, description) VALUES (:name, :description)";
+    $sql = "INSERT INTO categories (name, description) VALUES (:name, :description)";
     $request = $cnx->prepare($sql);
     $request->execute($data);
 }
 
-function deleteCategory($id) :void{
+function deleteCategory($id): void
+{
     $cnx = connexionBdd();
     $sql = "DELETE FROM categories WHERE id_category = :id";
     $request = $cnx->prepare($sql);
@@ -474,7 +488,8 @@ function deleteCategory($id) :void{
 }
 
 // fonction un peu redondante avec all Users
-function allCategories() : mixed {
+function allCategories(): mixed
+{
     $cnx = connexionBdd();
     $sql = "SELECT * FROM categories ORDER by name";
     $request = $cnx->query($sql);
@@ -484,7 +499,8 @@ function allCategories() : mixed {
 
 // fonction pour la modification des descriptions et nom des categories :
 
-function updateCategory(string $description, string $name, int $id) : void {
+function updateCategory(string $description, string $name, int $id): void
+{
 
     $cnx = connexionBdd();
     $sql = "UPDATE categories SET description = :description, name = :name  WHERE id_category = :id";
@@ -500,18 +516,20 @@ function updateCategory(string $description, string $name, int $id) : void {
 
 // ------------------FILMS -----------------------------------
 
-function showFilm(string $idparam) : mixed{
+function showFilm(string $idparam): mixed
+{
     $cnx = connexionBdd();
-    $sql= "SELECT * FROM films WHERE id_film = :id";
-    $request = $cnx-> prepare($sql);
+    $sql = "SELECT * FROM films WHERE id_film = :id";
+    $request = $cnx->prepare($sql);
     $request->execute(array(
-        ":id" =>$idparam
+        ":id" => $idparam
     ));
     $result = $request->fetch();
     return $result;
 }
 
-function allFilms() :mixed{
+function allFilms(): mixed
+{
     $cnx = connexionBdd();
     $sql = "SELECT * FROM films";
     $request = $cnx->query($sql);
@@ -519,41 +537,48 @@ function allFilms() :mixed{
     return $result;
 }
 
-function checkFilm($title ,$date){
+function checkFilm($title, $date)
+{
     $cnx = connexionBdd();
     $sql = "SELECT * FROM films WHERE title = :id_category AND date = :date";
     $request = $cnx->prepare($sql);
     $request->execute(array(
         ':id_category' => $title,
-        ':date'=> $date
+        ':date' => $date
     ));
     $result = $request->fetch();
     return $result;
 }
 
-function addFilm($idcat ,$title ,$director ,$actors ,$age ,$duration ,$synopsis ,$date ,$price ,$stock , $image){
+function addFilm($idcat, $title, $director, $actors, $age, $duration, $synopsis, $date, $price, $stock, $image)
+{
     $cnx = connexionBdd();
-    $sql ="INSERT INTO films (category_id ,title, director ,actors ,ageLimit , duration ,synopsis ,date ,image ,price ,stock  ) VALUES (:category_id ,:title, :director ,:actors ,:ageLimit , :duration ,:synopsis ,:date ,:image ,:price ,:stock )";
-
-    $request = $cnx->prepare($sql);
-    $request->execute(array(
+    $sql = "INSERT INTO films (category_id ,title, director ,actors ,ageLimit , duration ,synopsis ,date ,image ,price ,stock  ) VALUES (:category_id ,:title, :director ,:actors ,:ageLimit , :duration ,:synopsis ,:date ,:image ,:price ,:stock )";
+    $data = [
         ":category_id" => $idcat,
-        ":title" => $title , 
+        ":title" => $title,
         ":director" => $director,
-        ":actors" => $actors , 
+        ":actors" => $actors,
         ":ageLimit" => $age,
-        ":duration" => $duration , 
+        ":duration" => $duration,
         ":synopsis" => $synopsis,
-        ":date" => $date ,
+        ":date" => $date,
         ":price" => $price,
         ":stock" => $stock,
         ":image" => $image
-    ));
+    ];
+    // Appliquer htmlentities uniquement aux chaînes de caractères, sur les numeric c'est pas la peine
+    foreach ($data as $key => $value) {
+        $data[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+    }
+    $request = $cnx->prepare($sql);
+    $request->execute($data);
 }
 
-function deleteFilm(int $id):void{
+function deleteFilm(int $id): void
+{
     $cnx = connexionBdd();
-    $sql ="DELETE FROM films WHERE id_film = :id  ";
+    $sql = "DELETE FROM films WHERE id_film = :id  ";
     $request = $cnx->prepare($sql);
     $request->execute(array(":id" => $id));
 }
@@ -561,45 +586,47 @@ function deleteFilm(int $id):void{
 
 
 
-function updateFilm(int $id_film,int $category_id,string $title,string $director,string $actors,string $ageLimit,string $duration,string $synopsis,string $date,string $image,float $price,int $stock):void{
+function updateFilm(int $id_film, int $category_id, string $title, string $director, string $actors, string $ageLimit, string $duration, string $synopsis, string $date, string $image, float $price, int $stock): void
+{
     $film = [
-      'id_film'=> $id_film,
-      'category_id'=>$category_id,
-      'title' => $title,
-      'director' => $director,
-      'actors' => $actors,
-      'ageLimit' => $ageLimit,
-      'duration' => $duration,
-      'synopsis' => $synopsis,
-      'date' => $date,
-      'image' => $image,
-      'price' => $price,
-      'stock' => $stock
-  ];
+        'id_film' => $id_film,
+        'category_id' => $category_id,
+        'title' => $title,
+        'director' => $director,
+        'actors' => $actors,
+        'ageLimit' => $ageLimit,
+        'duration' => $duration,
+        'synopsis' => $synopsis,
+        'date' => $date,
+        'image' => $image,
+        'price' => $price,
+        'stock' => $stock
+    ];
     // Appliquer htmlentities uniquement aux chaînes de caractères
     foreach ($film as $key => $value) {
         if (is_string($value)) {
             $film[$key] = htmlentities($value, ENT_QUOTES, 'UTF-8');
         }
     }
-//----Pour une meilleure gestion des erreurs, le mode exception de PDO est activé et  l'exécution de la requête est enveloppée  dans un bloc try-catch :
+    //----Pour une meilleure gestion des erreurs, le mode exception de PDO est activé et  l'exécution de la requête est enveloppée  dans un bloc try-catch :
     try {
         $cnx = connexionBdd();
         $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Activer les exceptions PDO et afficher les erreurs PDO de manière plus claire.
-//----------------------------------------------------------------------------
-    $sql = "UPDATE films SET category_id = :category_id,title = :title,director = :director,actors = :actors,ageLimit = :ageLimit, duration =:duration,synopsis =:synopsis,date = :date, image = :image,price = :price, stock = :stock WHERE id_film = :id_film";
-    // ---------Préparation et exécution de la requête
-    $request = $cnx->prepare($sql);
-    $request ->execute($film);// Passer directement le tableau $film
+        //----------------------------------------------------------------------------
+        $sql = "UPDATE films SET category_id = :category_id,title = :title,director = :director,actors = :actors,ageLimit = :ageLimit, duration =:duration,synopsis =:synopsis,date = :date, image = :image,price = :price, stock = :stock WHERE id_film = :id_film";
+        // ---------Préparation et exécution de la requête
+        $request = $cnx->prepare($sql);
+        $request->execute($film); // Passer directement le tableau $film
 
     } catch (PDOException $e) {
-    echo "Erreur lors de la mise à jour du film : " . $e->getMessage();
-    //-------- Enregistrer l'erreur dans les logs
-    error_log("Erreur PDO : " . $e->getMessage()); 
+        echo "Erreur lors de la mise à jour du film : " . $e->getMessage();
+        //-------- Enregistrer l'erreur dans les logs
+        error_log("Erreur PDO : " . $e->getMessage());
     }
-  }
+}
 
-  function filmByDate(){
+function filmByDate()
+{
     $cnx = connexionBdd();
     $sql = "SELECT * FROM films ORDER BY date DESC LIMIT 6";
     $request = $cnx->query($sql);
@@ -607,7 +634,8 @@ function updateFilm(int $id_film,int $category_id,string $title,string $director
     return $result;
 }
 
-function filmByCategory($id) :mixed{
+function filmByCategory($id): mixed
+{
     $cnx = connexionBdd();
     $sql = "SELECT * FROM films WHERE category_id = :id";
     $request = $cnx->prepare($sql);
@@ -617,16 +645,109 @@ function filmByCategory($id) :mixed{
     $result = $request->fetchAll();
     return $result;
 }
-// calcul du montant total
+// calcul du montant total obsolete car on le fait dans le panier
 
-function calculMontant(array $tab){
-    $montantTotal = 0;
-    foreach ($tab as $key) {
-        $montantTotal += $key['price'] * $key['quantity'];
+// function calculMontant(array $tab)
+// {
+//     $montantTotal = 0;
+//     foreach ($tab as $key) {
+//         $montantTotal += $key['price'] * $key['quantity'];
+//     }
+//     return $montantTotal;
+// }
+
+
+function ajouterAuPanier($idFilm, $quantite, $title, $price, $image)
+{
+    if (!isset($_SESSION['panier'])) {
+        $_SESSION['panier'] = []; // Initialiser le panier s'il n'existe pas
     }
-    return $montantTotal;
+
+    if (isset($_SESSION['panier'][$idFilm])) {
+        // Si le film est déjà dans le panier, augmenter la quantité
+        $_SESSION['panier'][$idFilm]['quantity'] += $quantite;
+    } else {
+        // Sinon, ajouter le film au panier
+        $_SESSION['panier'][$idFilm] = [
+            'title' => $title,
+            'price' => $price,
+            'quantity' => $quantite,
+            'image' => $image
+        ];
+    }
 }
 
+function createTableOrders()
+{
 
+    $cnx = connexionBdd();
+    $sql = " CREATE TABLE IF NOT EXISTS orders (
+         id_order INT PRIMARY KEY AUTO_INCREMENT,
+         user_id INT NOT NULL,
+         price FLOAT,
+         created_at DATETIME,
+         is_paid ENUM('0', '1')
+    )";
+    $request = $cnx->exec($sql);
+}
+createTableOrders();
 
-?>
+function createTableOrderDetails()
+{
+
+    $pdo = connexionBdd();
+    $sql = " CREATE TABLE IF NOT EXISTS order_details (
+         order_id INT NOT NULL,
+         film_id INT NOT NULL,
+         price_film FLOAT NOT NULL,
+         quantity INT NOT NULL
+        
+    )";
+    $request = $pdo->exec($sql);
+}
+createTableOrderDetails();
+// création une seule fois de la clé secondaire avec foreignKey('orders', 'user_id', 'users', 'id_user');
+
+// création une seule fois de la clé secondaire sur order_details foreignKey('order_details', 'order_id', 'orders', 'id_order');
+
+// fonction de creation de commande
+function addOrder(int $user_id, float $price, string $created_at, string $is_paid): ?bool
+{
+
+    $cnx = connexionBdd();
+    $sql = "INSERT INTO orders(user_id, price, created_at, is_paid) VALUES (:user_id, :price, :created_at, :is_paid)";
+    $request = $cnx->prepare($sql);
+    $request->execute(array(
+        ':user_id'     => $user_id,
+        ':price'       => $price,
+        ':created_at'  => $created_at,
+        ':is_paid'     => $is_paid
+
+    ));
+    if ($request) {
+        return true;
+    }
+}
+
+function lastId(): array
+{
+    $pdo = connexionBdd();
+    $sql = "SELECT MAX(id_order) AS lastId FROM orders";
+    $request = $pdo->query($sql);
+    $result = $request->fetch();
+    return $result;
+}
+
+function addOrderDetails(int $orderId, int $filmId, float $filmPrice, int $quantity): void
+{
+
+    $pdo = connexionBdd();
+    $sql = "INSERT INTO order_details(order_id, film_id, price_film, quantity) VALUES (:order_id, :film_id, :price_film,:quantity)";
+    $request = $pdo->prepare($sql);
+    $request->execute(array(
+        ':order_id'     => $orderId,
+        ':film_id'      => $filmId,
+        ':price_film'   => $filmPrice,
+        ':quantity'     => $quantity,
+    ));
+}
