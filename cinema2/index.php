@@ -3,16 +3,51 @@
 require_once "inc/functions.inc.php";
 //debug($_SESSION);
 //------- RECUPERATION DE TOUS LES FILMS DE LA TABLE FILMS
-// $info = "";
+$info = "";
 $films = allFilms();
 $derniersFilms = array_slice($films, -6); // On récupère les 6 derniers films
+$message = "";
 //debug($derniersFilms);
-$message = "Le nombre de films visibles est  : ";
-if (isset($_GET) && !empty($_GET) && (isset($_GET['action']) && $_GET['action'] == 'viewmore')) {
-    $films = allFilms();
+//$message = "Le nombre de films visibles est  : ";
+// if (isset($_GET) && !empty($_GET) && (isset($_GET['action']) && $_GET['action'] == 'viewmore')) {
+//     $films = allFilms();
+// } else {
+//     $films = $derniersFilms;
+// }
+
+// Récupération des films selon la page et la superglobale $_GET **********************************************************************************
+if (isset($_GET) && !empty($_GET)) { // Vérifie si la superglobale $_GET existe et n'est pas vide
+
+    // Le premier affichage dépend de l'existence de la clé id_category dans la superglobale $_GET
+    if (isset($_GET['id_category'])) {
+        $idCategory = htmlentities($_GET['id_category']); // Sécurise l'ID en échappant les caractères spéciaux
+
+        if (is_numeric($idCategory)) { // Vérifie si l'ID est numérique
+            $cat = showCategory($idCategory); // Récupère les détails de la catégorie via son ID
+
+            if (($cat['id_category'] != $idCategory) || empty($idCategory)) { // Vérifie la validité de l'ID de la catégorie
+                header('location:index.php'); // Redirige vers la page d'accueil si l'ID n'est pas valide
+            } else {
+                $films = filmByCategory($idCategory); // Récupère les films par catégorie
+                $message = "Cette catégorie contient : ";
+
+                if (!$films) { // Si aucun film n'est trouvé
+                    $info = alert("Désolé ! cette catégorie ne contient aucun film", "danger"); // Affiche un message d'alerte
+                }
+            }
+        } else {
+            header('location:index.php'); // Redirige vers la page d'accueil si l'ID n'est pas numérique
+        }
+    } elseif (isset($_GET['action']) && $_GET['action'] == 'viewmore') { // Vérifie si l'action est 'voirPlus'
+        $films = allFilms(); // Récupère tous les films
+        $message = "Le nombre total de films : ";
+    }
 } else {
-    $films = $derniersFilms;
+    $films = filmByDate(); // Récupère les films par date
+    //$films = $derniersFilms; //variante avec fonction array_slice
+    $message = "Le nombre de films sortie en dernier ";
 }
+//***************************************************************************************************************** */
 
 require_once "inc/header.inc.php";
 // debug(count($films));
@@ -38,7 +73,6 @@ require_once "inc/header.inc.php";
                             <a href="./showFilm.php?action=view&id_film=<?= $film['id_film'] ?>" class="btn">Voir plus</a> <!-- Lien pour voir plus de détails -->
                         </div>
                     </div>
-
                 </div>
             <?php
             }

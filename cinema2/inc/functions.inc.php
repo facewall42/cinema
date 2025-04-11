@@ -1,11 +1,9 @@
 <?php
-session_start();
-// constante pour définir le chemin du site
-
+session_start(); // on appelle la fonction session_start() pour pouvoir utiliser les variables de session
+// constante pour définir le chemin du site :
 define("RACINE_SITE", "http://localhost/cinema2/");
 
 ///////////////////////////////////////// Fonction alert ///////////////////////////////////////////////////////////////
-
 function alert(string $contenu, string $class): string
 {
     return "<div class=\"alert alert-$class alert-dismissible fade show text-center w-50 m-auto mb-5\" role=\"alert\">
@@ -14,29 +12,22 @@ function alert(string $contenu, string $class): string
             </div>";
 }
 
-
 ////////////////////////////////////////////// Fonction pour debugger //////////////////////////////////////////////////////////
 
 function debug($var)
 {
-
     echo '<pre class= "border border-dark bg-light text-danger fw-bold w-50 p-5 mt-5">';
-
     var_dump($var);
-
     echo '</pre>';
 }
 //////// FONCTION POUR CONVERTIR LA STRING EN TABLEAUX POUR LES ACTEURS////////////////////////////////
 function stringToArray(string $string): array
 {
-
     $array = explode('/', trim($string, '/')); // Je transforme ma chaîne de caractères en tableau et je supprime les / autour de la chaîne de caractères 
     return $array; // ma fonction retourne un tableau
-
 }
 
 ////////////////////////////////////////////// Condition pour la déconnexion de l'utilisateur (bouton déconnexion) //////////////////////////////////////////////////////////
-
 
 if (isset($_GET['action']) && $_GET['action'] === 'deconnexion') {
     // tout dépend de l'objectif du site 
@@ -46,26 +37,18 @@ if (isset($_GET['action']) && $_GET['action'] === 'deconnexion') {
 
     unset($_SESSION['client']);
     // on supprime l'indice 'client' de la session pour se déconnecter / cette fonction détruit les éléments du tableau $_SESSION['client'].
-
-    // Puis notre utilisateur est alors déconnecté, donc on va le renvoyer vers par exemple, la page d'authentification
-
     // session_destroy();
     // La fonction session_destroy détruit toutes les données de la session déjà établie. Cette fonction détruit la session sur le serveur
-
+    // Puis notre utilisateur est alors déconnecté, donc on va le renvoyer vers par exemple, la page d'authentification
     header('location:' . RACINE_SITE . 'index.php');
 }
 
-
 ////////////////////////////////////////////// Fonction pour la connexion à la base de données //////////////////////////////////////////////////////////
-
 
 // On va utiliser l'extension PHP Data Objects (PDO), elle définit une excellente interface pour accéder à une base de données depuis PHP et d'exécuter des requêtes SQL.
 // Pour se connecter à la BDD avec PDO il faut créer une instance de cet Objet (PDO) qui représente une connexion à la base de données, pour cela il faut se servir du constructeur de la classe
 // Ce constructeur demande certains paramètres:
 // On déclare des constantes d'environnement qui vont contenir les information à la connexion à la BDD
-
-
-
 
 // Constante du serveur
 define("DBHOST", "localhost");
@@ -79,45 +62,70 @@ define("DBPASS", "");
 // // Constante pour le nom de la BDD
 define("DBNAME", "cinema");
 
+//version sahar pour la connexion à la BDD : *********************************************************************************************************************************
+//function connexionBdd(): object
+//{
+//DSN (Data Source Name): DSN est une chaîne de caractères qui contient les informations de connexion à la base de données.
+//$dsn = mysql:host=localhost;dbname=cinema;charset=utf8;
+//   $dsn = "mysql:host=" . DBHOST . ";dbname=" . DBNAME . ";charset=utf8mb4";   // utf8mb4 est le jeu de caractères recommandé pour MySQL, car il prend en charge tous les caractères Unicode, y compris les emojis.
 
+//Grâce à PDO on peut lever une exception (une erreur) si la connexion à la BDD ne se réalise pas(exp: suite à une faute au niveau du nom de la BDD) et par la suite si cette erreur est capté on lui demande d'afficher une erreur
 
+//   try { // dans le try on va instancier PDO, c'est créer un objet de la classe PDO (un élment de PDO)
+// Sans la variable dsn les constantes d'environnement
+// $pdo = new PDO('mysql:host=localhost;dbname=entreprise;charset=utf8','root','');
+//       $pdo = new PDO($dsn, DBUSER, DBPASS);
+//On définit le mode d'erreur de PDO sur Exception
+//       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// POUR SAHAR:  cet atribut est à rajouter après le premier fetch en bas 
+//On définit le mode de "fetch" par défaut
+//        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+// grâce à fetch_assoc, on récupère l'objet (qu'on ne peut pas afficher comme ça), puis fetch le transforme en tableau, qu'on peut afficher !
+// je vérifie la connexion avec ma BDD avec un simple echo
 
+// echo "Je suis connecté à la BDD";
+//   } catch (PDOException $e) {  // PDOException est une classe qui représente une erreur émise par PDO et $e c'est l'objet de la clase en question qui va stocker cette erreur
 
-function connexionBdd(): object
+//       die("Erreur : " . $e->getMessage()); // die d'arrêter le PHP et d'afficher une erreur en utilisant la méthode getmessage de l'objet $e
+//   }
+
+//le catch sera exécuté dès lors que PDO va rencontrer une erreur et la variable $e va stocker cette erreur
+//}
+// VERSION DEEPSEEK ***************************************************************************************************************************************************************
+/* Établit une connexion PDO à la base de données
+ * 
+ * @throws PDOException Si la connexion échoue
+ * @return PDO Instance de connexion PDO
+ */
+function connexionBdd(): PDO
 {
+    $options = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES   => false, // Désactive l'émulation des requêtes préparées
+        PDO::ATTR_TIMEOUT            => 5, // Timeout de 5 secondes
+    ];
 
+    $dsn = sprintf(
+        'mysql:host=%s;dbname=%s;charset=utf8mb4',
+        DBHOST,
+        DBNAME
+    );
 
-    //DSN (Data Source Name):
+    try {
+        return new PDO($dsn, DBUSER, DBPASS, $options);
+    } catch (PDOException $e) {
+        // Journalisation de l'erreur (optionnel)
+        error_log('Erreur de connexion BDD : ' . $e->getMessage());
 
-    //$dsn = mysql:host=localhost;dbname=cinema;charset=utf8;
-    $dsn = "mysql:host=" . DBHOST . ";dbname=" . DBNAME . ";charset=utf8";
-
-    //Grâce à PDP on peut lever une exception (une erreur) si la connexion à la BDD ne se réalise pas(exp: suite à une faute au niveau du nom de la BDD) et par la suite si cette erreur est capté on lui demande d'afficher une erreur
-
-    try { // dans le try on va instancier PDO, c'est créer un objet de la classe PDO (un élment de PDO)
-        // Sans la variable dsn les constantes d'environnement
-        // $pdo = new PDO('mysql:host=localhost;dbname=entreprise;charset=utf8','root','');
-        $pdo = new PDO($dsn, DBUSER, DBPASS);
-        //On définit le mode d'erreur de PDO sur Exception
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        // POUR SAHAR:  cet atribut est à rajouter après le premier fetch en bas 
-        //On définit le mode de "fetch" par défaut
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        // grâce à fetch_assoc, on récupère l'objet (qu'on ne peut pas afficher comme ça), puis fetch le transforme en tableau, qu'on peut afficher !
-        // je vérifie la connexion avec ma BDD avec un simple echo
-
-        // echo "Je suis connecté à la BDD";
-    } catch (PDOException $e) {  // PDOException est une classe qui représente une erreur émise par PDO et $e c'est l'objet de la clase en question qui va stocker cette erreur
-
-        die("Erreur : " . $e->getMessage()); // die d'arrêter le PHP et d'afficher une erreur en utilisant la méthode getmessage de l'objet $e
+        // Relance l'exception pour une gestion personnalisée par l'appelant
+        throw new PDOException(
+            "Impossible de se connecter à la base de données. Veuillez réessayer plus tard.",
+            0,
+            $e
+        );
     }
-
-    //le catch sera exécuter dès lors on aura un problème da le try
-    return $pdo;
 }
-
-
-
 
 
 // À partir d'ici on est connecté à la BDD et la variable $pdo est l'objet qui représente la connexion à la BDD, cette variable va nous servir à effectuer les requêtes SQL et à interroger la base de données 
@@ -125,14 +133,7 @@ function connexionBdd(): object
 // debug($pdo);
 //debug(get_class_methods($pdo)); // permet d'afficher la liste des méthodes présentes dans l'objet $pdo.
 
-
-
-
-
 // // // // // // // // // // // Table catégories // // // // // // // // // // // // // // 
-
-
-
 function createTableCategories(): void
 { // cette fonction va juste créer une table dans la base de données, elle ne retourne rien
 
@@ -150,16 +151,9 @@ function createTableCategories(): void
 
     $request = $cnx->exec($sql);
 }
-
 // createTableCategories();
 
-
-
-
 //// //// //// //// //// //// //// //// Table films //// //// //// //// //// //// //// //// 
-
-
-
 function createTableFilms(): void
 {
 
@@ -172,16 +166,9 @@ function createTableFilms(): void
 
     $request2 = $cnx->exec($sql2);
 }
-
-
 // createTableFilms();
 
-
-
 //// //// //// //// //// //// //// //// Table users //// //// //// //// //// //// //// //// 
-
-
-
 function createTableUsers(): void
 {
 
@@ -194,11 +181,7 @@ function createTableUsers(): void
 
     $request3 = $cnx->exec($sql3);
 }
-
-
 // createTableUsers();
-
-
 
 
 ########################################## Création des clés étrangères #################################################
@@ -232,7 +215,6 @@ function foreignKey(string $tableFK, string $keyFK, string $tablePK, string $key
 */
 
 ////////////////////////////////////////////////// Fonction ajout d'un utilisateur //////////////////////////////////////////////////
-
 
 function addUser(
     string $lastName,
@@ -288,7 +270,6 @@ function addUser(
         // ENT_QUOTES : est une constante en PHP  qui convertit les guillemets simples et doubles. 
         // => ' (guillemet simple) devient &#039; 
         // 'UTF-8' : Spécifie que l'encodage utilisé est UTF-8.
-
         // htmlentities() prend en compte les simples quotes de base, alors que htmlspecialchars ne le fait pas. Bon à savoir.
 
     }
@@ -303,15 +284,11 @@ function addUser(
 
     //prepare() est une méthode qui permet de préparer la requête sans l'exécuter. Elle contient un marqueur :firstName qui est vide et attend une valeur.
 
-
     /* Les requêtes préparees sont préconisées si vous exécutez plusieurs fois la même requête. Ainsi vous évitez au SGBD de répéter toutes les phases analyse/ interpretation / exécution de la requête (gain de performance). Les requêtes préparées sont aussi utilisées pour nettoyer les données et se prémunir des injections de type SQL.
-
                     1- On prépare la requête
                     2- On lie le marqueur à la requête
                     3- On exécute la requête 
-
 */
-
     // $request->execute(array(
     //     // on prend les valeurs qui sont protégées, bien sûr !
     //     ':lastName' => $data['lastName'], 
@@ -333,48 +310,65 @@ function addUser(
     $request->execute($data);
 }
 
+// ANCIENNES FONCTIONS BASIQUES *************************************************************************************************
+//function checkEmailUser(string $email): mixed // soit on récupère un tableau avec un seul champ, soit on récupère un booléen qui donne false
+// {
+//     $cnx = connexionBdd();
+//     $sql = "SELECT email FROM users WHERE email = :email";
+//     $request = $cnx->prepare($sql);
+//     $request->execute(array(
+//         ':email' => $email
+//     ));
+//     $result = $request->fetch(); // transforme l'objet qu'on récupère en tableau !
+//     return $result; // car on veut le tableau
+// }
 
-function checkEmailUser(string $email): mixed
-{ // soit on récupère un tableau avec un seul champ (mais c'est bien un tableau), soit on récupère un booléen qui donne false
+// function checkPseudoUser(string $pseudo): mixed
+// {
+//     $cnx = connexionBdd();
+//     $sql = "SELECT pseudo FROM users WHERE pseudo = :pseudo";
+//     $request = $cnx->prepare($sql);
+//     $request->execute(array(
+//         ':pseudo' => $pseudo
+//     ));
+//     $result = $request->fetch(); // transforme l'objet qu'on récupère en tableau !
+//     return $result; // car on veut le tableau
+// }
+/* OPTIMISATION DES DEUX PRECEDENTES FONCTIONS :********************************************************************************
+Vérifie l'existence d'une valeur dans un champ spécifique de la table users
+* 
+* @param string $field Le champ à vérifier (email, pseudo, etc.)
+* @param string $value La valeur à rechercher
+* @return mixed Retourne le tableau des données si trouvé, false sinon
+*/
+function checkUserField(string $field, string $value): mixed
+{
+    // Liste des champs autorisés pour la sécurité
+    $allowedFields = ['email', 'pseudo', 'id', 'nom', 'prenom']; // Ajoutez les champs nécessaires
+
+    // Validation du champ
+    if (!in_array($field, $allowedFields)) {
+        throw new InvalidArgumentException("Le champ $field n'est pas autorisé pour la vérification");
+    }
 
     $cnx = connexionBdd();
-    $sql = "SELECT email FROM users WHERE email = :email";
+    $sql = "SELECT $field FROM users WHERE $field = :value";
     $request = $cnx->prepare($sql);
-    $request->execute(array(
+    $request->execute([':value' => $value]);
 
-        ':email' => $email
-    ));
-
-    $result = $request->fetch(); // transforme l'objet qu'on récupère en tableau !
-
-    return $result; // car on veut le tableau
-
+    return $request->fetch();
 }
 
-function checkPseudoUser(string $pseudo): mixed
-{ // soit on récupère un tableau avec un seul champ (mais c'est bien un tableau), soit on récupère un booléen qui donne false
+//**************************************************************************************************************************** */
 
-    $cnx = connexionBdd();
-    $sql = "SELECT pseudo FROM users WHERE pseudo = :pseudo";
-    $request = $cnx->prepare($sql);
-    $request->execute(array(
 
-        ':pseudo' => $pseudo
-    ));
 
-    $result = $request->fetch(); // transforme l'objet qu'on récupère en tableau !
-    return $result; // car on veut le tableau
-
-}
-
-function checkPseudoEtEmailUser(string $pseudo, string $email): mixed
-{ // soit on récupère un tableau avec un seul champ (mais c'est bien un tableau), soit on récupère un booléen qui donne false
-
+function checkPseudoEtEmailUser(string $pseudo, string $email): mixed // soit on récupère un tableau avec un seul champ soit on récupère un booléen qui donne false
+{
     $cnx = connexionBdd();
     $sql = "SELECT * FROM users WHERE (pseudo = :pseudo AND email = :email)"; // on peut aussi mettre SELECT pseudo, email
     $request = $cnx->prepare($sql);
     $request->execute(array(
-
         ':pseudo' => $pseudo,
         ':email' => $email
     ));
@@ -386,7 +380,6 @@ function checkPseudoEtEmailUser(string $pseudo, string $email): mixed
 
 function allUsers(): mixed
 {
-
     $cnx = connexionBdd();
     $sql = "SELECT * FROM users";
     $request = $cnx->query($sql);
@@ -396,17 +389,13 @@ function allUsers(): mixed
 
 function showUser(int $id): mixed
 {
-
     $cnx = connexionBdd();
     $sql = "SELECT * FROM users WHERE id_user = :id";
     $request = $cnx->prepare($sql);
 
     $request->execute(array(
-
         ':id' => $id,
-
     ));
-
     $result = $request->fetch();
     return $result;
 }

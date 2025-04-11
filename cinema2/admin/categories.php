@@ -2,9 +2,7 @@
 
 require_once "../inc/functions.inc.php";
 $info = "";
-
 $categories = allCategories();
-
 $varCategoryName = "";
 $varCategoryDescription = "";
 

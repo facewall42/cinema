@@ -34,7 +34,8 @@ if (!empty($_POST)) { //verification que le formulaire a ete soumis en methode p
         // exit;
         if ($result->rowcount() != 0) { //on compte le nombre de ligne que contient result voir le debug(result) juste avant
             //affiche le msg de confirmation
-            $alert = '<div class="alert alert-success mt-3 text-center "><p>Employé ajouté avec succès !</p> <p>Consultez le <a href="employes.php"> tableau des employés</a></p> </div>';
+            $alert = '<div class="alert alert-success mt-3 text-center "><p>Employé ajouté avec succès !</p> <p>Consultez le <a href="employes.php"> tableau des employés (redirection dans 4 secondes)</a></p> </div>';
+            header('refresh:4, URL=employes.php');
         } else {
             $alert = '<div class="alert alert-danger mt-3 text-center ">Erreur lors de l\'ajout de l\'employé</div>';
         }

@@ -54,8 +54,11 @@
                                 $categories = allCategories();
                                 // foreach($categories as $categorie): à la place de l'accolade
                                 foreach ($categories as $categorie) {   ?>
-                                    <li><a class="dropdown-item " href=""> <?= $categorie['name'] ?></a></li>
-
+                                    <li>
+                                        <a class="dropdown-item"
+                                            href="<?= RACINE_SITE ?>index.php?id_category=<?= $categorie['id_category'] ?>"> <?= $categorie['name'] ?>
+                                        </a>
+                                    </li>
 
                                 <?php } // endforeach à la place de l'accolade pour plus de lisibilité de la boucle
 

@@ -4,10 +4,8 @@ require_once('inc/init.inc.php');
 $alert = "";
 $h1 = 'Liste des employes';
 $paragraphe = 'Ici vous pouvez voir la liste des employes';
-//connexion a la base entreprise et table employes
-$request =  $pdoEntreprise->query("SELECT * FROM employes");
-$employes = $request->fetchAll(); // on veut tous les utilisateurs (on récupère toutes les lignes à la fois), donc on utilise fetchAll(), car fetch() ne donne qu'un élement et le fetch assoce est deja implemente
-//debug($result);
+
+
 
 //partie gestion du GET initialisé dans l'action supprimer&id car & ajoute l'"id" 
 
@@ -24,12 +22,26 @@ if (isset($_GET['action'], $_GET['id']) && $_GET['action'] == 'supprimer') {
         if ($result->rowCount() > 0) {
             //l'employe a bien ete supprime
             $alert = '<div class="alert alert-success mt-3 text-center "><p>Employé supprimé avec succès !</p></div>';
+            header('refresh:4, URL=employes.php');
         } else {
             $alert = '<div class="alert alert-danger mt-3 text-center "><p>Aucun Employé trouvé </p></div>';
         }
     }
 }
 
+//connexion a la base entreprise et table employes
+$request =  $pdoEntreprise->query("SELECT * FROM employes");
+$listeEmployes = $request->fetchAll(); // on veut tous les utilisateurs (on récupère toutes les lignes à la fois), donc on utilise fetchAll(), car fetch() ne donne qu'un élement et le fetch assoce est deja implemente
+//debug($result);
+
+//limitation aux 10 derniers employés par defaut : évite une requete supplementaire
+$derniersEmployes = array_slice($listeEmployes, -10);
+// ecoute si appui sur voir plus viewmore
+if (isset($_GET) && !empty($_GET) && (isset($_GET['action']) && $_GET['action'] == 'viewmore')) {
+    $employes =  $listeEmployes;
+} else {
+    $employes = $derniersEmployes;
+}
 
 require_once('inc/header.inc.php');
 ?>
@@ -37,9 +49,13 @@ require_once('inc/header.inc.php');
     <section class="col-12">
         <?= $alert ?>
         <h2>La direction</h2>
+        <?php if (isset($_GET['action']) && $_GET['action'] == 'viewmore') {
+            echo ('');
+        } else {
+            echo ('<div class="alert alert-primary mt-3 text-center col-4"><a href="?action=viewmore" class="btn p-1 fs-6"> Voir plus d\'employés </a></div>');
+        } ?>
 
-
-
+        <!-- Lien pour voir plus de films -->
         <table class="table table-hover">
             <thead class="table-primary">
                 <tr>
@@ -50,6 +66,7 @@ require_once('inc/header.inc.php');
                     <th>Salaire</th>
                     <th>Date d'embauche</th>
                     <th>Consulter</th>
+                    <th>Modifier</th>
                     <th>Supprimer</th>
 
                 </tr>
@@ -68,7 +85,6 @@ require_once('inc/header.inc.php');
 
                         <!-- On affiche le genre avec une condition ternaire pour transformer "f" ou "h" en texte lisible -->
                         <td><?= $employe['sexe'] == 'f' ? 'Femme' : 'Homme' ?>
-
                         </td>
 
                         <!-- On affiche le service dans lequel travaille l'employé -->
@@ -96,16 +112,14 @@ require_once('inc/header.inc.php');
                             $date = date('d-m-Y', strtotime($employe['date_embauche']));
                             echo ($date);
                             ?>
-
                         </td>
                         <td><a href="employe.php?id=<?= $employe['id_employes'] ?>"><i class="fa-solid fa-eye"></i></a></td>
+                        <td><a href="modifEmploye.php?id=<?= $employe['id_employes'] ?>"><i class="fa-solid fa-pen"></i></a></td>
                         <td><a href="?action=supprimer&id=<?= $employe['id_employes'] ?>"><i class="fa-solid fa-trash"></i></a></td>
 
                     </tr>
                 <?php
-
                 }
-
                 ?>
             </tbody>
         </table>

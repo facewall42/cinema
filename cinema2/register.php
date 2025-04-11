@@ -15,14 +15,14 @@ $info = ""; // variable dans laquelle on va stocker les erreurs
 
 // Si on a des valeurs dans notre formulaire (=$_POST non vide), on va les traiter, sinon on dit au visiteur de remplir les champs
 if (!empty($_POST)) {
-    
+
     // On vérifie si un champs est vide 
 
     // trim en js, ça permet d'enlever les espaces ; en php, trim permet d'enlever aussi les / et autres caractères spéciaux
     $verif = true;
-    foreach($_POST as $key=> $value) { // je prend les valeurs de mon tableau en le parcourant
+    foreach ($_POST as $key => $value) { // je prend les valeurs de mon tableau en le parcourant
 
-        if(empty(trim($value))) { // si une de ces valeurs est vide, je passe verif en false
+        if (empty(trim($value))) { // si une de ces valeurs est vide, je passe verif en false
             $verif = false;
         }
     }
@@ -67,15 +67,15 @@ if (!empty($_POST)) {
             $ : Fin de la chaîne.
        */
 
-       if (!isset($_POST['mdp']) || !preg_match($regexMdp, $_POST['mdp'])) {
+        if (!isset($_POST['mdp']) || !preg_match($regexMdp, $_POST['mdp'])) {
             $info .= alert("Le champ mot de passe n'est pas valide", "danger");
         }
 
-       if (!isset($_POST['confirmMdp']) || $_POST['mdp'] !== $_POST['confirmMdp']) {
+        if (!isset($_POST['confirmMdp']) || $_POST['mdp'] !== $_POST['confirmMdp']) {
             $info .= alert("La confirmation et le mot de passe doivent être identiques", "danger");
         }
 
-       if (!isset($_POST['civility']) || !in_array($_POST['civility'], ['f','h'])) {
+        if (!isset($_POST['civility']) || !in_array($_POST['civility'], ['f', 'h'])) {
             $info .= alert("La civilité n'est pas valide", "danger");
         }
 
@@ -87,14 +87,14 @@ if (!empty($_POST)) {
 
         // on récupère l'année grâce au explode, qui nous explose la chaine de caractère date en un tableau (de chaines de caractères) quand il tombe sur le séparateur '-', puis on (int) l'indice 0 du tableau, qui correpond à l'année. Grâce à cela, on peut ensuite faire des opérations numériques avec les dates pour après. 
 
-       if (!isset($_POST['birthday']) || (int) $birthdayYear[0] > $year1 || (int) $birthdayYear[0] < $year2 ) {
+        if (!isset($_POST['birthday']) || (int) $birthdayYear[0] > $year1 || (int) $birthdayYear[0] < $year2) {
             $info .= alert("La date de naissance n'est pas valide", "danger");
         }
 
         if (!isset($_POST['address']) || strlen(trim($_POST['address'])) < 5 || strlen(trim($_POST['address'])) > 50) {
             $info .= alert("L'adresse n'est pas valide", "danger");
         }
-       
+
         if (!isset($_POST['zip']) || !preg_match('/^[0-9]{5}$/', $_POST['zip'])) {
             $info .= alert("Le code postal n'est pas valide", "danger");
         }
@@ -122,32 +122,31 @@ if (!empty($_POST)) {
             $address = trim($_POST['address']);
             $zip = trim($_POST['zip']);
             $city = trim($_POST['city']);
-            $country = ucfirst(strtolower(trim($_POST['country']))) ;
+            $country = ucfirst(strtolower(trim($_POST['country'])));
 
             $mdpHash = password_hash($mdp, PASSWORD_DEFAULT);
 
             // Cette fonction PHP crée un hachage sécurisé d'un mot de passe en utilisant un algorithme de hachage fort : génère une chaîne de caractères unique à partir d'une entrée. C'est un mécanisme unidirectionnel dont l'utilité est d'empêcher le déchiffrement d'un hash. Lors de la connexion, il faudra comparer le hash stocké dans la base de données avec celui du mot de passe fourni par l'internaute.
-                // PASSWORD_DEFAULT : constante indique à password_hash() d'utiliser l'algorithme de hachage par défaut actuel c'est le plus recommandé car elle garantit que le code utilisera toujours le meilleur algorithme disponible sans avoir besoin de modifications.
-                // debug($mdpHash);
-                // debug($mdp);
-            
+            // PASSWORD_DEFAULT : constante indique à password_hash() d'utiliser l'algorithme de hachage par défaut actuel c'est le plus recommandé car elle garantit que le code utilisera toujours le meilleur algorithme disponible sans avoir besoin de modifications.
+            // debug($mdpHash);
+            // debug($mdp);
 
-            $emailExist = checkEmailUser($email);
+
+            //$emailExist = checkEmailUser($email); Je vais utiliser la fonction checkUserField
+            $emailExist = checkUserField("email", $email);
             // debug($emailExist);
-            $pseudoExist = checkPseudoUser($pseudo);
+            //$pseudoExist = checkPseudoUser($pseudo); je vais utiliser la fonction checkUserField
+            $pseudoExist = checkUserField("pseudo", $pseudo);
             // debug($pseudoExist);
             $userExist = checkPseudoEtEmailUser($pseudo, $email);
             // debug($userExist);
 
             // die;
 
-
             if ($emailExist) { // on vérifie si l'email existe dans la BDD //En gros on va : "SELECT * FROM users WHERE (email = email input du formulaire)"
-                
-                $info = alert("Ce mail n'est pas disponible", "danger");
-            }
 
-            elseif ($pseudoExist) { // on vérifie si le pseudo existe dans la BDD
+                $info = alert("Ce mail n'est pas disponible", "danger");
+            } elseif ($pseudoExist) { // on vérifie si le pseudo existe dans la BDD
 
                 $info = alert("Ce pseudo n'est pas disponible", "danger");
             }
@@ -155,21 +154,27 @@ if (!empty($_POST)) {
             if ($userExist) { // on vérifie si l'email ET le pseudo correspondent au même utilisateur
 
                 $info = alert("Vous avez déjà un compte", "danger");
-            }
+            } elseif (empty($info)) {
 
-            elseif (empty($info)) {
-
-                addUser($lastName, $firstName, $pseudo, $email, $phone, $mdpHash, $civility, $birthday, 
-                $address, $zip, $city, $country);
+                addUser(
+                    $lastName,
+                    $firstName,
+                    $pseudo,
+                    $email,
+                    $phone,
+                    $mdpHash,
+                    $civility,
+                    $birthday,
+                    $address,
+                    $zip,
+                    $city,
+                    $country
+                );
 
                 $info = alert("Vous êtes bien inscrit, vous pouvez vous connecter <a href='authentication.php' class='text-danger fw-bold'>ici</a>", 'success');
-
             }
-
         }
-
     }
-
 }
 
 require_once "inc/header.inc.php";
