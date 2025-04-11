@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>https://kinesiologue-paris-vincennes.fr/</loc>
+  <lastmod>2025-03-26T22:15:43+00:00</lastmod>
+  <priority>1.00</priority>
+  <changefreq>weekly</changefreq>
+  <image:image>
+    <image:loc>https://kinesiologue-paris-vincennes.fr/assets/pics/logoDetoure-web.webp</image:loc>
+    <image:title>Logo - Stéphanie Mousset Kinésiologue Paris</image:title>
+    <image:caption>Kinésiologie spécialisée EFT et réflexes archaïques</image:caption>
+  </image:image>
+  <image:image>
+    <image:loc>https://kinesiologue-paris-vincennes.fr/assets/pics/S_MoussetKinesio-2.webp</image:loc>
+    <image:title>Stéphanie Mousset en séance de kinésiologie</image:title>
+  </image:image>
+</url>
+<url>
+  <loc>https://kinesiologue-paris-vincennes.fr/kinesiologie.html</loc>
+  <lastmod>2025-03-26T22:15:43+00:00</lastmod>
+  <priority>0.90</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://kinesiologue-paris-vincennes.fr/eft.html</loc>
+  <lastmod>2025-03-26T22:15:43+00:00</lastmod>
+  <priority>0.90</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://kinesiologue-paris-vincennes.fr/reflexes-archaiques.html</loc>
+  <lastmod>2025-03-26T22:15:43+00:00</lastmod>
+  <priority>0.80</priority>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://kinesiologue-paris-vincennes.fr/enfants.html</loc>
+  <lastmod>2025-03-26T22:15:43+00:00</lastmod>
+  <priority>0.70</priority>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>https://kinesiologue-paris-vincennes.fr/deontologie.html</loc>
+  <lastmod>2025-03-26T22:15:43+00:00</lastmod>
+  <priority>0.30</priority>
+  <changefreq>yearly</changefreq>
+</url>
+<url>
+  <loc>https://kinesiologue-paris-vincennes.fr/mentions-legales.html</loc>
+  <lastmod>2025-03-26T22:15:43+00:00</lastmod>
+  <priority>0.10</priority>
+  <changefreq>yearly</changefreq>
+</url>
+
+
+</urlset>
