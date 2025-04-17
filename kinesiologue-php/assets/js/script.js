@@ -1,3 +1,10 @@
+// Initialisation avec paramètre de compatibilité pour resoudre les problèmes liés à des écouteurs d'événements non passifs qui peuvent dégrader les performances de défilement et donc le SEO
+// const mapOptions = {
+//     gestureHandling: "cooperative",
+//     keyboardShortcuts: false,
+// };
+// new google.maps.Map(document.getElementById("map"), mapOptions);
+
 // Permet d'activer la skip-link avec Alt+1 POUR L'ACCESSIBILITE DIRECTE AU CONTENU PRINCIPAL
 document.addEventListener("keydown", (e) => {
     if (e.altKey && e.key === "1") {
@@ -17,6 +24,7 @@ function setVolume(volume) {
 
 function playAudio() {
     if (audio.paused) {
+        audio.load(); // Charger l'audio avant de le jouer
         audio.play();
     } else {
         audio.pause();
@@ -24,7 +32,7 @@ function playAudio() {
 }
 
 //************************************************************************
-// Gestion affichage vidéo progressif autoplay enclenché
+// Gestion affichage vidéo progressif autoplay désenclenché !
 
 const video = document.getElementById("background-video");
 
@@ -36,24 +44,21 @@ function removeElement(classe) {
     classe.classList.remove("active");
 }
 
-// Démarre la vidéo au chargement de la page si video presente
+// Démarre la vidéo de la page si vidéo présente
 if (video) {
-    document.addEventListener("DOMContentLoaded", function () {
-        setTimeout(function () {
-            addElement(video);
-        }, 1300); // Délai correspondant à data-aos-delay
-    });
     // Fait disparaître la vidéo à la fin de la lecture
     video.addEventListener("ended", function () {
         removeElement(video);
     });
-    // Événements provoquant la lecture : click et scroll
-    document.addEventListener("click", function () {
+
+    // Fonction pour gérer l'interaction
+    function showVideo() {
         if (video.paused) {
-            addElement(video);
+            video.currentTime = 0;
+            video.classList.add("active");
             video.play();
         }
-    });
+    }
     // Fonction debounce pour ne pas sursolliciter
     function debounce(func, wait) {
         let timeout;
@@ -62,16 +67,20 @@ if (video) {
             timeout = setTimeout(() => func.apply(this, args), wait);
         };
     }
-    // Gestionnaire d'événement scroll avec debounce
-    const handleScroll = debounce(function () {
-        if (video.paused) {
-            addElement(video);
-            video.play();
-        }
-    }, 100); // 100 ms de délai
 
-    document.addEventListener("scroll", handleScroll);
+    // Gestionnaire d'événement scroll avec debounce
+    // Utilise la même fonction pour le scroll
+    // 100 ms de délai
+    const debounceAndShowVideo = debounce(function () {
+        console.log("Scroll detected, trying to show video...");
+        showVideo();
+    }, 100);
+
+    // Événements provoquant la lecture : click et scroll
+    document.addEventListener("click", showVideo);
+    document.addEventListener("scroll", debounceAndShowVideo);
 }
+
 // Explication du debounce
 // Le debounce est une technique utilisée pour limiter le nombre d'exécutions d'une fonction, surtout dans le cas d'événements fréquents comme scroll ou resize. Cela permet d'éviter que la fonction ne soit appelée trop souvent, ce qui peut affecter les performances.
 // Fonction debounce :
@@ -79,46 +88,15 @@ if (video) {
 // Elle utilise un setTimeout pour retarder l'exécution de la fonction.
 // Si l'événement est déclenché à nouveau avant la fin du délai, le setTimeout précédent est annulé (clearTimeout) et un nouveau est démarré.
 // Application au scroll :
-// La fonction handleScroll est enveloppée dans le debounce.
-// Elle ne sera exécutée que si l'utilisateur arrête de faire défiler la page pendant au moins 100 ms (ou le délai que vous avez défini).
+// La fonction debounceAndShowVideo est enveloppée dans le debounce.
+// Elle ne sera exécutée que si l'utilisateur arrête de faire défiler la page pendant au moins 100 ms .
 // Choix du délai :
-// 100 ms : C'est un délai raisonnable pour un événement comme scroll. Vous pouvez l'ajuster en fonction de vos besoins.
+// 100 ms : C'est un délai raisonnable pour un événement comme scroll.
 // Si vous choisissez un délai trop court, le debounce n'aura pas beaucoup d'effet.
 // Si vous choisissez un délai trop long, l'utilisateur pourrait remarquer un léger retard dans l'exécution de la fonction.
 
 // Résultat
 // Avec cette implémentation, l'événement scroll ne déclenchera la lecture de la vidéo que si l'utilisateur arrête de faire défiler la page pendant au moins 100 ms. Cela évite de surcharger le navigateur avec des appels répétés à video.play().
-// ***********************************************************************
-// // Fonctions de gestion d'affichage du menu burger en mode smartphone (max 567px)
-// var menuToggle = document.getElementById("menuToggle");
-// var menuList = document.querySelector(".menu-list");
-// var menuItem = document.querySelectorAll(".menu-item");
-
-// function toggleMenu() {
-//     menuToggle.classList.toggle("active");
-//     menuList.classList.toggle("active");
-// }
-
-// function menuSmartphoneListener() {
-//     menuToggle.addEventListener("click", toggleMenu);
-//     menuItem.forEach((item, index) => {
-//         if (index !== 1 && index != 3) {
-//             // Ignore les éléments (index 1 et 3 "Mes pratiques" et questions)
-//             item.addEventListener("click", toggleMenu);
-//         }
-//     });
-// }
-
-// // Gérer le rafraîchissement du menu au passage de la largeur > 567px
-// function smartphoneEvents() {
-//     if (window.matchMedia("(max-width: 567px)").matches) {
-//         menuSmartphoneListener();
-//     } else if (window.matchMedia("(width: 568px)").matches) {
-//         menuList.classList.remove("active");
-//         menuToggle.classList.remove("active");
-//         location.reload();
-//     }
-// }
 
 // Fonctions de gestion d'affichage du menu burger en mode smartphone (max 567px)
 var menuToggle = document.getElementById("menuToggle");

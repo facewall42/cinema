@@ -73,6 +73,7 @@ p,
 li,
 .skip-link {
     color: white;
+    /* text-decoration: none !important; */
 }
 em,
 .skip-link {
@@ -84,12 +85,12 @@ em,
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 p,
 li {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
 }
 /* // non utilisees encore :--------------------------------------  */
 /* .ft-size3 {
@@ -110,8 +111,8 @@ h4 {
     font-weight: normal;
     text-align: center;
     font-family: "the_seasons_regularregular", sans-serif;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding-bottom: 10px !important;
+    padding-top: 10px !important;
 }
 .signature {
     font-size: larger;
@@ -121,15 +122,15 @@ h4 {
     background-color: var(--celadon1);
     border: none;
 }
-.opaque-celadon {
+/* .opaque-celadon {
     background-color: var(--celadon4);
     border: none;
-}
+} */
 .noStyleButton {
     background-color: rgba(255, 255, 255, 0);
     border: none;
-    padding: 0;
-    margin: 0;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 /* header et footer ***************************************** */
@@ -143,13 +144,18 @@ header {
         width: 100%;
         z-index: 100;
         padding: 8px 0;
+        background-color: var(--celadon4);
+
         ul {
             list-style-type: none;
             width: 60%;
+            /* forcer bootstrap : */
+            padding-left: 0 !important;
+            margin-bottom: 0 !important;
             li {
                 /* padding: 2px; */
                 a {
-                    padding: 5px;
+                    padding: 5px !important;
                     display: block;
                     font-size: 1.1rem;
                 }
@@ -232,31 +238,12 @@ label {
     border-radius: 5px;
     font-weight: 100;
     font-size: 0.8rem;
-    padding: 3px 6px;
-    margin: 2px;
+    padding: 3px 6px !important;
+    margin: 2px !important;
     transition-property: background-color;
     transition-duration: 0.8s;
     transition-timing-function: cubic-bezier(0.17, 0.8, 0.55, 0.4);
     text-align: center;
-}
-/* button:hover { */
-/* background-color: var(--celadon-dark);
-    cursor: pointer;
-} */
-/* ***********animation logo********* */
-@keyframes bounce {
-    0% {
-        transform: scale(0.8);
-    }
-    50% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(0.8);
-    }
-}
-.element {
-    animation: bounce 30s infinite;
 }
 
 /**** Style pour le contrôle de volume *****/
@@ -305,7 +292,7 @@ label {
     justify-content: space-around;
     align-content: space-around;
     width: 70%;
-    padding: 0 20px;
+    padding: 0 20px !important;
 }
 .LogoEffect {
     border-radius: 90px;
@@ -348,12 +335,13 @@ label {
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: -1; /* recherche debug ios  */
-    opacity: 0; /* Masquer la vidéo initialement */
-    transition: opacity 4s ease-in-out; /* Transition pour un effet de fondu */
+    opacity: 0;
+    z-index: -1; /* important pour ne pas masquer le footer */
+    transition: opacity 2s ease-in-out;
 }
 #background-video.active {
-    opacity: 1; /* Rendre la vidéo visible */
+    opacity: 1;
+    z-index: -1; /* important pour ne pas masquer le footer */
 }
 
 /* fin partie video ****************************************************/
@@ -410,6 +398,18 @@ main {
     background-size: contain;
     background-position: center;
 }
+
+#imgLogo2 {
+    height: 80px !important;
+    width: 80px !important;
+}
+
+#imgMiniLogo {
+    background: url(../pics/petitLOGO.webp) no-repeat;
+    height: 40px !important;
+    width: 40px !important;
+}
+
 #img-portrait {
     display: flex;
     flex-direction: row;
@@ -433,11 +433,7 @@ main {
 #imgMotifsDeSeance {
     background-image: url("../pics/MotifsDeSeance.webp");
 }
-#imgMiniLogo {
-    background: url(../pics/petitLOGO.webp) no-repeat;
-    height: 40px !important;
-    width: 40px !important;
-}
+
 #img-kinesiologie {
     background: url(../pics/kinesiologie.jpg);
 }
@@ -469,10 +465,6 @@ main {
     background: url(../pics/couple.jpg);
 }
 
-#imgLogo2 {
-    height: 80px !important;
-    width: 80px !important;
-}
 #imgMiniLogo,
 #imgPortrait,
 #imgConfiance,
@@ -526,20 +518,7 @@ iframe {
     padding: 2% 5%;
     text-align: center;
 }
-/* .singleButton {
-    width: 40%;
-    max-width: 250px;
-    min-height: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center !important;
-    border-radius: 15px;
-    padding: 3px 6px;
-    text-align: center;
-    em {
-        font-size: 1rem;
-    }
-} */
+
 .ft-elfsight {
     position: relative;
 }
@@ -578,6 +557,7 @@ iframe {
     flex-wrap: wrap;
     justify-content: space-around;
     align-self: center;
+    z-index: 2;
 }
 
 .footer-container h3 {

@@ -1,11 +1,11 @@
 <?php
+require_once __DIR__ . '/includes/config.php';
 
-
-include_once("./inc/head.php"); ?>
+include_once("./templates/head.php"); ?>
 
 <title>Thérapeute EFT Paris 11 | Libérer les Émotions Négatives & Gérer le Stress</title>
 <!-- SEO ######################################################""-->
-<link rel="canonical" href="https://www.kinesiologue-paris-vincennes.fr/eft.php" />
+<link rel="canonical" href="https://kinesiologue-paris-vincennes.fr/eft.php" />
 <meta name="description"
     content="Découvrez l'Emotional Freedom Technique EFT, pour libérer les émotions négatives, gérer le stress & apaiser l'anxiété. Tout savoir sur les bienfaits du tapping.">
 <meta name="keywords"
@@ -144,7 +144,7 @@ include_once("./inc/head.php"); ?>
 
 <body>
     <?php
-    include_once("./inc/header.php"); ?>
+    include_once("./templates/header.php"); ?>
 
     <main id="main" role="main">
         <!-- Section Présentation -->
@@ -404,4 +404,4 @@ include_once("./inc/head.php"); ?>
     </main>
 
     <?php
-    include_once("./inc/footer.php"); ?>
+    include_once("./templates/footer.php"); ?>

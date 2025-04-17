@@ -1,7 +1,7 @@
 <?php
+require_once __DIR__ . '/includes/config.php';
 
-
-include_once("./inc/head.php"); ?>
+include_once("./templates/head.php"); ?>
 <!-- Données variables -->
 <title>Code de déontologie des kinésiologues</title>
 <script type="application/ld+json">
@@ -169,7 +169,7 @@ include_once("./inc/head.php"); ?>
     }
 </script>
 <!-- SEO ######################################################""-->
-<link rel="canonical" href="https://www.kinesiologue-paris-vincennes.fr/deontologie.php" />
+<link rel="canonical" href="https://kinesiologue-paris-vincennes.fr/deontologie.php" />
 <meta name="description"
     content="Code de deontologie de la kinesiologie. Les principes éthiques et les règles de conduite à respecter pour les praticiens de la kinésiologie.">
 <meta name="keywords"
@@ -203,7 +203,7 @@ include_once("./inc/head.php"); ?>
 
 <body>
     <?php
-    include_once("./inc/header.php"); ?>
+    include_once("./templates/header.php"); ?>
     <main id="main" role="main">
         <div class="timbre">
             <h1 itemprop="headline" class="font-size2">Code de déontologie des kinésiologues</h1>
@@ -311,4 +311,4 @@ include_once("./inc/head.php"); ?>
     </main>
 
     <?php
-    include_once("./inc/footer.php"); ?>
+    include_once("./templates/footer.php"); ?>

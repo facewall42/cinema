@@ -1,7 +1,7 @@
 <?php
+require_once __DIR__ . '/includes/config.php';
 
-
-include_once("./inc/head.php"); ?>
+include_once("./templates/head.php"); ?>
 <!-- Données variables -->
 <title>Kinésiologie : Une Approche Holistique pour le Bien-Être et la Santé</title>
 <!-- JSON-LD -->
@@ -67,7 +67,7 @@ include_once("./inc/head.php"); ?>
     }
 </script>
 <!-- SEO ######################################################""-->
-<link rel="canonical" href="https://www.kinesiologue-paris-vincennes.fr/kinesiologie.php" />
+<link rel="canonical" href="https://kinesiologue-paris-vincennes.fr/kinesiologie.php" />
 <meta name="description"
     content="Découvrez la kinésiologie, une approche holistique pour soulager les douleurs chroniques, gérer le stress, et améliorer le bien-être émotionnel et physique. Tout savoir sur cette thérapie naturelle.">
 <meta name="keywords"
@@ -95,7 +95,7 @@ include_once("./inc/head.php"); ?>
 <!-- ############################################################## -->
 </head>
 <?php
-include_once("./inc/header.php"); ?>
+include_once("./templates/header.php"); ?>
 
 <main id="main" role="main">
     <!-- Section Présentation -->
@@ -260,4 +260,4 @@ include_once("./inc/header.php"); ?>
 </main>
 
 <?php
-include_once("./inc/footer.php"); ?>
+include_once("./templates/footer.php"); ?>

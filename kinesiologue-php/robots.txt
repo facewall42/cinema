@@ -1,7 +1,9 @@
 User-agent: *
+Disallow: /includes/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /tmp/
+Allow: /assets/
 Allow: /
 
 Sitemap: https://www.kinesiologue-paris-vincennes.fr/sitemap.xml

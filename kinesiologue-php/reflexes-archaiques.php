@@ -1,11 +1,11 @@
 <?php
+require_once __DIR__ . '/includes/config.php';
 
-
-include_once("./inc/head.php"); ?>
+include_once("./templates/head.php"); ?>
 
 <title>Intégrer les Réflexes Archaïques | Kinésiologue Paris</title>
 <!-- SEO ######################################################""-->
-<link rel="canonical" href="https://www.kinesiologue-paris-vincennes.fr/reflexes-archaiques.php" />
+<link rel="canonical" href="https://kinesiologue-paris-vincennes.fr/reflexes-archaiques.php" />
 <meta name="description"
   content="Stéphanie Mousset, kinésiologue, vous aide à intégrer les réflexes archaïques pour améliorer bien-être, apprentissages et gestion des émotions chez enfants et adultes.">
 <meta name="keywords"
@@ -331,7 +331,7 @@ include_once("./inc/head.php"); ?>
 
 <body>
   <?php
-  include_once("./inc/header.php"); ?>
+  include_once("./templates/header.php"); ?>
 
   <main id="main" role="main">
     <div id="presentation" class="timbre">
@@ -764,4 +764,4 @@ include_once("./inc/head.php"); ?>
   </main>
 
   <?php
-  include_once("./inc/footer.php"); ?>
+  include_once("./templates/footer.php"); ?>

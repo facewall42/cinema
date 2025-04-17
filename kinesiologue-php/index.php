@@ -1,12 +1,37 @@
 <?php
+require_once __DIR__ . '/includes/config.php';
 
-
-include_once("./inc/head.php"); ?>
-
-<!-- accessibilité : -->
-<meta name="theme-color" content="#74a9af">
+include_once("./templates/head.php"); ?>
 
 <title>Kinésiologue EFT à Paris 11ème - Stéphanie Mousset</title>
+
+<!-- SEO ######################################################""-->
+<meta name="description" content="Kinésiologue EFT Paris 11. Accompagnement personnalisé des adultes & enfants ressentant stress, blocages & douleurs pour retrouver confiance et sérénité." />
+<link rel="canonical" href="https://.kinesiologue-paris-vincennes.fr" />
+
+<meta name="keywords"
+    content="kinésiologue, Paris, EFT, Paris 11, bien-être, accompagnement, stress, blocages, douleurs, thérapeute, kinésiologie, médecine douce, test musculaire, réflexes archaïques, enfants, Titon, thérapie brève" />
+<meta name="author" content="Stéphanie Mousset" />
+<meta name="robots" content="index, follow" />
+<!-- Descriptions RESEAUX SOCIAUX OPEN GRAPH ################################-->
+<meta property="og:title" content="Kinésiologue EFT à Paris 11ème - Stéphanie Mousset" />
+<meta property="og:description"
+    content="Kinésiologue certifiée spécialisée en EFT à Paris 11ème. J’accompagne les enfants et les adultes ressentant blocages, stress ou douleurs à retrouver confiance et un apaisement durable. Prenez rendez-vous pour un accompagnement personnalisé." />
+<meta property="og:image" content="https://kinesiologue-paris-vincennes.fr/assets/pics/logoDetoure-web.webp" />
+<meta property="og:url" content="https://kinesiologue-paris-vincennes.fr/" />
+<meta property="og:type" content="website" />
+<!-- TWITTER ET X ############################################### -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Stéphanie Mousset Kinésiologue EFT à Paris 11" />
+<meta name="twitter:description"
+    content="Kinésiologue certifiée spécialisée en EFT à Paris 11ème. J’accompagne les enfants et les adultes ressentant blocages, stress ou douleurs à retrouver confiance et un apaisement durable. Prenez rendez-vous pour un accompagnement personnalisé." />
+<meta name="twitter:image" content="https://kinesiologue-paris-vincennes.fr/assets/pics/logoDetoure-web.webp" />
+<meta name="x:card" content="summary_large_image" />
+<meta name="x:title" content="Stéphanie Mousset Kinésiologue EFT à Paris 11" />
+<meta name="x:description"
+    content="Kinésiologue certifiée spécialisée en EFT à Paris 11ème. J’accompagne les enfants et les adultes ressentant blocages, stress ou douleurs à retrouver confiance et un apaisement durable. Prenez rendez-vous pour un accompagnement personnalisé." />
+<meta name="x:image" content="https://kinesiologue-paris-vincennes.fr/assets/pics/logoDetoure-web.webp" />
+
 <!-- JSON-LD -->
 <script type="application/ld+json">
     {
@@ -58,40 +83,16 @@ include_once("./inc/head.php"); ?>
         ]
     }
 </script>
-<!-- SEO ######################################################""-->
-<link rel="canonical" href="https://www.kinesiologue-paris-vincennes.fr" />
-<meta name="description"
-    content="Kinésiologue EFT Paris 11. Accompagnement personnalisé des adultes & enfants ressentant stress, blocages & douleurs pour retrouver confiance et sérénité." />
-<meta name="keywords"
-    content="kinésiologue, Paris, EFT, Paris 11, bien-être, accompagnement, stress, blocages, douleurs, thérapeute, kinésiologie, médecine douce, test musculaire, réflexes archaïques, enfants, Titon, thérapie brève" />
-<meta name="author" content="Stéphanie Mousset" />
-<meta name="robots" content="index, follow" />
-<!-- Descriptions RESEAUX SOCIAUX OPEN GRAPH ################################-->
-<meta property="og:title" content="Kinésiologue EFT à Paris 11ème - Stéphanie Mousset" />
-<meta property="og:description"
-    content="Kinésiologue certifiée spécialisée en EFT à Paris 11ème. J’accompagne les enfants et les adultes ressentant blocages, stress ou douleurs à retrouver confiance et un apaisement durable. Prenez rendez-vous pour un accompagnement personnalisé." />
-<meta property="og:image" content="https://kinesiologue-paris-vincennes.fr/assets/pics/logoDetoure-web.webp" />
-<meta property="og:url" content="https://kinesiologue-paris-vincennes.fr/" />
-<meta property="og:type" content="website" />
-<!-- TWITTER ET X ############################################### -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Stéphanie Mousset Kinésiologue EFT à Paris 11" />
-<meta name="twitter:description"
-    content="Kinésiologue certifiée spécialisée en EFT à Paris 11ème. J’accompagne les enfants et les adultes ressentant blocages, stress ou douleurs à retrouver confiance et un apaisement durable. Prenez rendez-vous pour un accompagnement personnalisé." />
-<meta name="twitter:image" content="https://kinesiologue-paris-vincennes.fr/assets/pics/logoDetoure-web.webp" />
-<meta name="x:card" content="summary_large_image" />
-<meta name="x:title" content="Stéphanie Mousset Kinésiologue EFT à Paris 11" />
-<meta name="x:description"
-    content="Kinésiologue certifiée spécialisée en EFT à Paris 11ème. J’accompagne les enfants et les adultes ressentant blocages, stress ou douleurs à retrouver confiance et un apaisement durable. Prenez rendez-vous pour un accompagnement personnalisé." />
-<meta name="x:image" content="https://kinesiologue-paris-vincennes.fr/assets/pics/logoDetoure-web.webp" />
 <!-- ############################################################## -->
 <!--  AOS style sheet  -------------------------------------------->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<!-- accessibilité : -->
+<meta name="theme-color" content="#74a9af">
 </head>
 
 <body>
     <?php
-    include_once("./inc/header.php"); ?>
+    include_once("./templates/header.php"); ?>
 
     <main id="main" role="main">
         <div id="presentation" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000" class="timbre">
@@ -162,6 +163,8 @@ include_once("./inc/head.php"); ?>
                         <!-- <div class="elfsight-app-a33491d1-7723-47e3-967a-67e2172df7f7 ft-elfsight"
                             data-elfsight-app-lazy></div>
                         <div class="ft-elfsight-mask"></div> -->
+
+
                     </div>
                 </div>
             </section>
@@ -253,17 +256,28 @@ include_once("./inc/head.php"); ?>
                             <!-- Insertion plan Google -->
                             <div>
                                 <div>
+                                    <!-- Premier iframe -->
+                                    <!-- Nouvel attribut expérimental importance="low"-->
                                     <iframe
                                         src="https://www.google.com/maps/embed?pb=!4v1737991130337!6m8!1m7!1sAxyzkv-b5hhXvMNilZcCfg!2m2!1d48.85209908768058!2d2.386364697563714!3f266.65688081461917!4f5.67684495623196!5f0.7820865974627469"
-                                        height="300px" allowfullscreen="" loading="lazy"
-                                        referrerpolicy="no-referrer-when-downgrade" allow="accelerometer; gyroscope"
+                                        height="300px"
+                                        loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade"
                                         title="Localisation du cabinet sur Google Maps"
-                                        aria-label="Vue de la rue du cabinet" role="img"></iframe>
+                                        aria-label="Vue de la rue du cabinet"
+                                        allow="accelerometer; gyroscope; fullscreen"
+                                        importance="low"></iframe>
+
+                                    <!-- Deuxième iframe -->
                                     <iframe
                                         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10501.280849465225!2d2.386189!3d48.852104000000004!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6736742a789a7%3A0xaca5cc8b9d272e5d!2sSt%C3%A9phanie%20Mousset%2C%20kin%C3%A9siologue%20Paris%2011!5e0!3m2!1sfr!2sfr!4v1739373450064!5m2!1sfr!2sfr"
-                                        height="350" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                                        height="350"
+                                        loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade"
                                         title="Localisation du cabinet sur Google Maps"
-                                        aria-label="Carte interactive du cabinet" role="img"></iframe>
+                                        aria-label="Carte interactive du cabinet"
+                                        allow="accelerometer; gyroscope; fullscreen"
+                                        importance="low"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -273,5 +287,5 @@ include_once("./inc/head.php"); ?>
         </div>
     </main>
     <?php
-    $scripts = ["", "aos"];
-    include_once("./inc/footer.php"); ?>
+    $scripts = ["bootstrap", "aos", ""]; //ne pas oublier "elfsight" si necessaire
+    include_once("./templates/footer.php"); ?>

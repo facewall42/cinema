@@ -1,9 +1,9 @@
 <?php
+require_once __DIR__ . '/includes/config.php';
 
+include_once("./templates/head.php"); ?>
 
-include_once("./inc/head.php"); ?>
-
-<link rel="canonical" href="https://www.kinesiologue-paris-vincennes.fr/enfants.php" />
+<link rel="canonical" href="https://kinesiologue-paris-vincennes.fr/enfants.php" />
 <title>Kinésiologie pour les Enfants : Réponses aux Questions des Parents FAQ</title>
 <!-- JSON-LD -->
 <script type="application/ld+json">
@@ -156,7 +156,7 @@ include_once("./inc/head.php"); ?>
 
 <body>
     <?php
-    include_once("./inc/header.php"); ?>
+    include_once("./templates/header.php"); ?>
 
     <main itemscope itemtype="https://schema.org/ProfessionalService" id="main" role="main">
         <div id="eft" class="timbre">
@@ -496,4 +496,4 @@ include_once("./inc/head.php"); ?>
     </main>
 
     <?php
-    include_once("./inc/footer.php"); ?>
+    include_once("./templates/footer.php"); ?>

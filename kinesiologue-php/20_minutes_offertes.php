@@ -1,9 +1,10 @@
 <!-- custom-window.html -->
 <?php
+require_once __DIR__ . '/includes/config.php';
 
-
-include_once("./inc/head.php"); ?>
+include_once("./templates/head.php"); ?>
 <title>20 minutes offertes</title>
+<link rel="canonical" href="https://.kinesiologue-paris-vincennes.fr" />
 <link rel="stylesheet" href="./assets/css/index_style.css" />
 <style>
     header {
@@ -22,7 +23,7 @@ include_once("./inc/head.php"); ?>
 
 <body>
     <?php
-    include_once("./inc/header.php"); ?>
+    include_once("./templates/header.php"); ?>
 
     <main id="main" role="main">
         <section id="intro" itemscope itemtype="https://schema.org/Procedure">
@@ -35,4 +36,4 @@ include_once("./inc/head.php"); ?>
     </main>
 
     <?php
-    include_once("./inc/footer.php"); ?>
+    include_once("./templates/footer.php"); ?>

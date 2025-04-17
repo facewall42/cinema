@@ -1,14 +1,14 @@
 <?php
+require_once __DIR__ . '/includes/config.php';
 
-
-include_once("./inc/head.php"); ?>
+include_once("./templates/head.php"); ?>
 
 <title>Mentions légales | Kinésiologue EFT Paris 11 - Stéphanie Mousset</title>
 <meta name="description"
     content="Mentions légales du cabinet de kinésiologie et EFT de Stéphanie Mousset à Paris 11ème. Informations juridiques et politique de confidentialité.">
 
 <!-- SEO -->
-<link rel="canonical" href="https://www.kinesiologue-paris-vincennes.fr/mentions-legales.php" />
+<link rel="canonical" href="https://kinesiologue-paris-vincennes.fr/mentions-legales.php" />
 <meta name="robots" content="noindex, follow">
 <!-- Microdonnées et JSON-LD -->
 <script type="application/ld+json">
@@ -48,7 +48,7 @@ include_once("./inc/head.php"); ?>
 
 <body>
     <?php
-    include_once("./inc/header.php"); ?>
+    include_once("./templates/header.php"); ?>
 
     <main id="main" role="main">
         <div class="timbre">
@@ -236,4 +236,4 @@ include_once("./inc/head.php"); ?>
     </main>
 
     <?php
-    include_once("./inc/footer.php"); ?>
+    include_once("./templates/footer.php"); ?>
