@@ -414,8 +414,7 @@ include_once("./templates/head.php"); ?>
                             </ul>
                         </div>
                         <div class="mono-button">
-                            <a href="#" class="contact-link highlight"
-                                onclick="openCustomWindow('https://meet.brevo.com/stephanie-mousset/appel-20-min-offertes')">
+                            <a href="./20_minutes_offertes.php" class="contact-link highlight">
                                 <img src="./assets/pics/pictos/phone.png" alt="" aria-hidden="true">Echangeons ensemble
                                 !<br>Appel
                                 20 minutes offertes

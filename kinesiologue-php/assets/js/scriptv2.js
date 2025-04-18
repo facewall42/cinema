@@ -1,10 +1,3 @@
-// Initialisation avec paramètre de compatibilité pour resoudre les problèmes liés à des écouteurs d'événements non passifs qui peuvent dégrader les performances de défilement et donc le SEO
-// const mapOptions = {
-//     gestureHandling: "cooperative",
-//     keyboardShortcuts: false,
-// };
-// new google.maps.Map(document.getElementById("map"), mapOptions);
-
 // Permet d'activer la skip-link avec Alt+1 POUR L'ACCESSIBILITE DIRECTE AU CONTENU PRINCIPAL
 document.addEventListener("keydown", (e) => {
     if (e.altKey && e.key === "1") {
@@ -32,7 +25,7 @@ function playAudio() {
 }
 
 //************************************************************************
-// Gestion affichage vidéo progressif autoplay désenclenché !
+// Gestion affichage vidéo progressif autoplay enclenché
 
 const video = document.getElementById("background-video");
 
@@ -53,12 +46,19 @@ if (video) {
 
     // Fonction pour gérer l'interaction
     function showVideo() {
+        if (!video.readyState) {
+            console.log("La video n'a pas encore chargé.");
+            video.load();
+        }
         if (video.paused) {
+            setTimeout(function () {
+                addElement(video);
+            }, 1000);
             video.currentTime = 0;
-            video.classList.add("active");
             video.play();
         }
     }
+
     // Fonction debounce pour ne pas sursolliciter
     function debounce(func, wait) {
         let timeout;
@@ -67,12 +67,11 @@ if (video) {
             timeout = setTimeout(() => func.apply(this, args), wait);
         };
     }
-
     // Gestionnaire d'événement scroll avec debounce
     // Utilise la même fonction pour le scroll
     // 100 ms de délai
     const debounceAndShowVideo = debounce(function () {
-        console.log("Scroll detected, trying to show video...");
+        console.log("Scroll détecté, je lance la video ..."); //commentaire à enlever
         showVideo();
     }, 100);
 
@@ -80,7 +79,6 @@ if (video) {
     document.addEventListener("click", showVideo);
     document.addEventListener("scroll", debounceAndShowVideo);
 }
-
 // Explication du debounce
 // Le debounce est une technique utilisée pour limiter le nombre d'exécutions d'une fonction, surtout dans le cas d'événements fréquents comme scroll ou resize. Cela permet d'éviter que la fonction ne soit appelée trop souvent, ce qui peut affecter les performances.
 // Fonction debounce :
@@ -88,10 +86,10 @@ if (video) {
 // Elle utilise un setTimeout pour retarder l'exécution de la fonction.
 // Si l'événement est déclenché à nouveau avant la fin du délai, le setTimeout précédent est annulé (clearTimeout) et un nouveau est démarré.
 // Application au scroll :
-// La fonction debounceAndShowVideo est enveloppée dans le debounce.
-// Elle ne sera exécutée que si l'utilisateur arrête de faire défiler la page pendant au moins 100 ms .
+// La fonction handleScroll est enveloppée dans le debounce.
+// Elle ne sera exécutée que si l'utilisateur arrête de faire défiler la page pendant au moins 100 ms (ou le délai que vous avez défini).
 // Choix du délai :
-// 100 ms : C'est un délai raisonnable pour un événement comme scroll.
+// 100 ms : C'est un délai raisonnable pour un événement comme scroll. Vous pouvez l'ajuster en fonction de vos besoins.
 // Si vous choisissez un délai trop court, le debounce n'aura pas beaucoup d'effet.
 // Si vous choisissez un délai trop long, l'utilisateur pourrait remarquer un léger retard dans l'exécution de la fonction.
 
@@ -177,9 +175,9 @@ function openCustomWindow(url) {
         let newWindow;
         if (url.includes("20-min-offertes")) {
             // Ouvrir une nouvelle fenêtre avec la page personnalisée
-            newWindow = window.open("./20_minutes_offertes.php", "_blank");
+            newWindow = window.open("./20_minutes_offertes.html", "_blank");
         } else {
-            newWindow = window.open("./rendez-vous.php", "_blank");
+            newWindow = window.open("./rendez-vous.html", "_blank");
         }
         // Vérifier si la fenêtre a été ouverte avec succès
         if (newWindow) {

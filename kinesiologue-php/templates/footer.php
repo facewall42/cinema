@@ -13,8 +13,7 @@
                         <img src="./assets/pics/pictos/email.svg" alt="" aria-hidden="true">
                         Envoyer un email
                     </a>
-                    <a href="#" class="contact-link highlight"
-                        onclick="openCustomWindow('https://meet.brevo.com/stephanie-mousset')">
+                    <a href="./rendez-vous.php" class="contact-link highlight">
                         <img src="./assets/pics/pictos/calendar.svg" alt="" aria-hidden="true">
                         Prendre rendez-vous
                     </a>
@@ -72,16 +71,16 @@ if ((isset($scripts)) && !empty($scripts)) {
         echo '<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>';
         echo '<script>AOS.init();</script>';
     }
-    if (in_array("bootstrap", $scripts)) {
-        // scripts bootstrap :
-        echo '<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>';
-        // Bootstrap JavaScript Libraries :
-        echo '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>';
-    }
+    // if (in_array("bootstrap", $scripts)) {
+    // scripts bootstrap :
+    // echo '<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>';
+    // Bootstrap JavaScript Libraries :
+    // echo '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>';
+    // }
 }
 ?>
 <!-- script  maison -->
-<script src="./assets/js/script.js"></script>
+<script src="./assets/js/scriptv2.js"></script>
 </body>
 
 </html>

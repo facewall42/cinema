@@ -36,23 +36,23 @@
                     <span></span>
                 </button>
                 <ul class="menu boxLight menu-list">
-                    <li class="menu-item"><a href="./index.php#quiSuisJe" class="text-decoration-none">Qui Suis-je ?</a></li>
+                    <li class="menu-item"><a href="./index.php#quiSuisJe">Qui Suis-je ?</a></li>
                     <li class="menu-item"><span class="menu-index">Mes Pratiques</span>
                         <ul class="submenu">
-                            <li><a href="./kinesiologie.php" class="text-decoration-none">Kinésiologie</a></li>
-                            <li><a href="./eft.php" class="text-decoration-none">EFT</a></li>
-                            <li><a href="./reflexes-archaiques.php" class="text-decoration-none">Réflexes Archaïques</a></li>
+                            <li><a href="./kinesiologie.php">Kinésiologie</a></li>
+                            <li><a href="./eft.php">EFT</a></li>
+                            <li><a href="./reflexes-archaiques.php">Réflexes Archaïques</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item"><a href="./index.php#seance" class="text-decoration-none">Séance</a></li>
+                    <li class="menu-item"><a href="./index.php#seance">Séance</a></li>
                     <li class="menu-item"><span class="menu-index">Questions fréquentes</span>
                         <ul class="submenu">
-                            <li><a href="./index.php#pourquoi" class="text-decoration-none">Pourquoi consulter?</a></li>
-                            <li><a href="./enfants.php" class="text-decoration-none">Questions des parents</a></li>
-                            <li><a href="./deontologie.php" class="text-decoration-none">Déontologie</a></li>
+                            <li><a href="./index.php#pourquoi">Pourquoi consulter?</a></li>
+                            <li><a href="./enfants.php">Questions des parents</a></li>
+                            <li><a href="./deontologie.php">Déontologie</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item"><a href="./index.php#rendezVous" class="text-decoration-none">Rendez-vous</a></li>
+                    <li class="menu-item"><a href="./index.php#rendezVous">Rendez-vous</a></li>
                 </ul>
             </nav>
         </div>

@@ -152,10 +152,8 @@ include_once("./templates/head.php"); ?>
                                 <br><br>
                             </div>
                             <div class="mono-button">
-                                <a href="#" class="contact-link highlight"
-                                    onclick="openCustomWindow('https://meet.brevo.com/stephanie-mousset/appel-20-min-offertes')"><img
-                                        src="./assets/pics/pictos/phone.png" alt="" aria-hidden="true">Echangeons
-                                    ensemble !<br>Appel
+                                <a href="./20_minutes_offertes.php" class="contact-link highlight">
+                                    <img src="./assets/pics/pictos/phone.png" alt="" aria-hidden="true">Echangeons ensemble !<br>Appel
                                     20 minutes offertes
                                 </a>
                             </div>
@@ -226,14 +224,11 @@ include_once("./templates/head.php"); ?>
                         <h3>Rendez-vous</h3>
                         <br>
                         <div class="doubleButton">
-                            <a href="#" class="contact-link highlight"
-                                onclick="openCustomWindow('https://meet.brevo.com/stephanie-mousset/appel-20-min-offertes')"><img
-                                    src="./assets/pics/pictos/phone.png" alt="" aria-hidden="true">Appel
+                            <a href="./20_minutes_offertes.php" class="contact-link highlight">
+                                <img src="./assets/pics/pictos/phone.png" alt="" aria-hidden="true">Appel
                                 20 minutes offertes
                             </a>
-                            <a href="#" class="contact-link highlight"
-                                onclick="openCustomWindow('https://meet.brevo.com/stephanie-mousset')">
-
+                            <a href="./rendez-vous.php" class="contact-link highlight">
                                 <img src="./assets/pics/pictos/calendar.svg" alt="" aria-hidden="true">
                                 Prendre rendez-vous
                             </a>
@@ -287,5 +282,5 @@ include_once("./templates/head.php"); ?>
         </div>
     </main>
     <?php
-    $scripts = ["bootstrap", "aos", ""]; //ne pas oublier "elfsight" si necessaire
+    $scripts = ["", "aos", ""]; //ne pas oublier "elfsight" ou "bootstrap" si necessaire
     include_once("./templates/footer.php"); ?>

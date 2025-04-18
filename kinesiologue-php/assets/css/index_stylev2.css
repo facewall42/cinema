@@ -57,7 +57,7 @@ Répond au critère 2.4.1 (Contournement de blocs). */
     background-size: cover;
     background-position: center;
     /* background-repeat: no-repeat; */
-    z-index: -2; /* recherche debug ios  */
+    z-index: -20; /* recherche debug ios  */
 }
 body {
     background-color: rgb(207, 179, 144);
@@ -336,12 +336,12 @@ label {
     top: 0;
     bottom: 0;
     opacity: 0;
-    z-index: -1; /* important pour ne pas masquer le footer */
+    z-index: -10; /* important pour ne pas masquer le footer */
     transition: opacity 2s ease-in-out;
 }
 #background-video.active {
     opacity: 1;
-    z-index: -1; /* important pour ne pas masquer le footer */
+    z-index: -10; /* important pour ne pas masquer le footer */
 }
 
 /* fin partie video ****************************************************/
@@ -364,6 +364,7 @@ main {
 .glassEffect {
     border-radius: 4px;
     background-color: hwb(193 84% 9% / 0.307);
+    margin-bottom: 50px;
     /* border-style: ridge; */
 }
 .fontColor {
@@ -697,7 +698,8 @@ iframe {
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 0;
+    padding: 0 !important;
+    margin: 0 !important;
     z-index: 10;
 }
 

@@ -12,9 +12,9 @@ date_default_timezone_set('Europe/Paris');
 // =============================================
 // 2. PARAMÈTRES DE CACHE
 // =============================================
-// Cache navigateur (1h pour les pages, 1 an pour les assets)
-// header('Cache-Control: public, max-age=3600');
-// header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 3600) . ' GMT');
+// Cache navigateur (5 minutes pour les pages en mode production)
+// header('Cache-Control: public, max-age=300');
+// header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 300) . ' GMT');
 
 
 // =============================================
